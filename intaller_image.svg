@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 140" width="100%" height="100%">
+    <defs>
+        <!-- Gradients -->
+        <linearGradient id="aiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8E2DE2" />
+            <stop offset="100%" stop-color="#4A00E0" />
+        </linearGradient>
+        <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00C9FF" />
+            <stop offset="100%" stop-color="#0072FF" />
+        </linearGradient>
+        
+        <style>
+            .font-title { font-family: 'Segoe UI', -apple-system, sans-serif; font-weight: 600; }
+            .font-tagline { font-family: 'Segoe UI', -apple-system, sans-serif; font-weight: 500; }
+        </style>
+    </defs>
+
+    <!-- Text Group -->
+    <g transform="translate(20, 65)">
+        <!-- Main Title -->
+        <text x="0" y="0" class="font-title" font-size="64" fill="#1F242D">Voice</text>
+        <text x="175" y="0" class="font-title" font-size="64" fill="url(#textGrad)">Clear</text>
+
+        <!-- AI Tagline Box and Text -->
+        <g transform="translate(0, 30)">
+            <rect x="0" y="0" width="50" height="32" rx="8" fill="url(#aiGrad)" />
+            <text x="13" y="22" class="font-title" font-size="18" fill="#1F242D" letter-spacing="1">AI</text>
+            <text x="65" y="21" class="font-tagline" font-size="17" fill="#808892" letter-spacing="2.5">AUDIO ENHANCEMENT</text>
+        </g>
+    </g>
+</svg>

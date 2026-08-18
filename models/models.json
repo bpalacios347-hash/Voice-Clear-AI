@@ -1,0 +1,9 @@
+[
+  {
+    "version":     "1.0",
+    "model_name":  "deepfilternet3.onnx",
+    "sample_rate": 48000,
+    "frame_size":  480,
+    "checksum":    "e1157049059434ae0d5857e32c812abea227b975e946b2eb64d001abbce156d3"
+  }
+]

@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Windows Kits\10\Tools\10.0.26100.0\x64\devcon.exe" install "C:\Users\Byron\Desktop\VoiceClearAI\src\driver\sysvad_mic\TabletAudioSample\x64\Release\ComponentizedAudioSample.inf" Root\sysvad_ComponentizedAudioSample > "C:\Users\Byron\Desktop\VoiceClearAI\sysvad_install.log" 2>&1

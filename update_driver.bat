@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Windows Kits\10\Tools\10.0.26100.0\x64\devcon.exe" update "C:\Users\Byron\Desktop\VoiceClearAI\src\driver\sys\x64\Release\VoiceClearVAD\VoiceClearVAD.inf" root\VoiceClearVAD > "C:\Users\Byron\Desktop\VoiceClearAI\update_log.txt" 2>&1

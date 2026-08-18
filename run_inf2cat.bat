@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x86\inf2cat.exe" /v /driver:"C:\Users\Byron\Desktop\VoiceClearAI\src\driver\sysvad_mic\TabletAudioSample\x64\Release" /os:10_x64 > "C:\Users\Byron\Desktop\VoiceClearAI\inf2cat.log" 2>&1

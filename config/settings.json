@@ -1,0 +1,62 @@
+{
+  "_comment": "Voice Clear AI — Runtime configuration. Loaded at service startup.",
+
+  "service": {
+    "log_level": "Info",
+    "log_max_size_mb": 10,
+    "log_max_files": 5,
+    "crash_upload_enabled": true,
+    "watchdog_xrun_threshold": 5000,
+    "watchdog_interval_seconds": 2
+  },
+
+  "audio": {
+    "sample_rate": 48000,
+    "frame_size": 480,
+    "buffer_size_ms": 20,
+    "capture_device": "default",
+    "output_device": "default"
+  },
+
+  "ai": {
+    "model": "deepfilternet3.onnx",
+    "default_profile": "Balanced",
+    "inference_thread_priority": "ProAudio",
+    "enabled": true
+  },
+
+  "ipc": {
+    "pipe_name": "\\\\.\\pipe\\VoiceClearAI_v2",
+    "telemetry_interval_ms": 50,
+    "max_clients": 1
+  },
+
+  "updates": {
+    "auto_check": true,
+    "check_interval_hours": 24,
+    "manifest_url": "https://voiceclearai.github.io/releases/version.json"
+  },
+
+  "profiles": {
+    "Balanced": {
+      "attenuation_db": 40.0,
+      "voice_preservation": 0.85,
+      "cpu_limit_ms": 15.0
+    },
+    "Strong": {
+      "attenuation_db": 60.0,
+      "voice_preservation": 0.70,
+      "cpu_limit_ms": 15.0
+    },
+    "Voice Preservation": {
+      "attenuation_db": 25.0,
+      "voice_preservation": 0.95,
+      "cpu_limit_ms": 15.0
+    },
+    "Low CPU": {
+      "attenuation_db": 30.0,
+      "voice_preservation": 0.80,
+      "cpu_limit_ms": 8.0
+    }
+  }
+}

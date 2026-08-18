@@ -1,0 +1,67 @@
+[Version]
+Signature="$WINDOWS NT$"
+Class=Media
+ClassGuid={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%ProviderName%
+DriverVer=07/28/2026, 1.0.0.0
+CatalogFile=VoiceClearVAD.cat
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+%DeviceName%=VoiceClearVAD, root\VoiceClearVirtualMic6
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+VoiceClearVAD.sys = 1
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[VoiceClearVAD.NT]
+CopyFiles=VoiceClearVAD.CopyFiles
+AddReg=VoiceClearVAD.AddReg
+
+[VoiceClearVAD.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_VoiceClearFilter%,VoiceClearVAD.Interfaces
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_VoiceClearFilter%,VoiceClearVAD.Interfaces
+
+[VoiceClearVAD.Interfaces]
+AddReg=VoiceClearVAD.Interface.AddReg
+
+[VoiceClearVAD.Interface.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DeviceName%
+
+[VoiceClearVAD.CopyFiles]
+VoiceClearVAD.sys
+
+[VoiceClearVAD.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,VoiceClearVAD.sys
+HKLM,SYSTEM\CurrentControlSet\Control\MediaCategories\%KSNODENAME_VOICECLEAR_MIC%,Name,,%DeviceName%
+HKLM,SYSTEM\CurrentControlSet\Control\MediaCategories\%KSNODENAME_VOICECLEAR_MIC%,Display,,%DeviceName%
+
+[VoiceClearVAD.NT.Services]
+AddService = VoiceClearVAD, 0x00000002, VoiceClearVAD_Service_Inst
+
+[VoiceClearVAD_Service_Inst]
+DisplayName    = %DeviceName%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\VoiceClearVAD.sys
+
+[Strings]
+ProviderName="Voice Clear AI"
+ManufacturerName="Voice Clear AI"
+DeviceName="Voice Clear Virtual Mic"
+DiskName="Voice Clear Driver Installation Disk"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSNAME_VoiceClearFilter="{ff70ebf1-7a01-4166-94e4-96ba407d9d36}"
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSNODENAME_VOICECLEAR_MIC="{91234567-89AB-CDEF-0123-456789ABCDEF}"

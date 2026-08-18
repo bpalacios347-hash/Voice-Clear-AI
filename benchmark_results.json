@@ -1,0 +1,24 @@
+{
+    "audio_verification": {
+        "input_energy": 37174.4453125,
+        "output_energy": 0.2578969895839691,
+        "reduction_db": 51.587982177734375
+    },
+    "environment": {
+        "model_sha256": "e1157049059434ae0d5857e32c812abea227b975e946b2eb64d001abbce156d3",
+        "onnxruntime_version": "1.19.0"
+    },
+    "metrics": {
+        "average_ms": 9.831163000000002,
+        "max_ms": 12.3544,
+        "min_ms": 4.5954,
+        "p50_ms": 9.8409,
+        "p95_ms": 10.3606,
+        "p99_ms": 11.383
+    },
+    "processing_info": {
+        "block_size_samples": 480,
+        "total_blocks": 500,
+        "total_duration_ms": 4915.581500000001
+    }
+}

@@ -1,0 +1,405 @@
+You are a Senior Windows Audio Engineer with 20+ years of experience.
+
+Your mission is to design and build a professional Windows desktop application that behaves similarly to Krisp.
+
+IMPORTANT
+
+This project MUST NOT use RNNoise.
+
+Instead, implement DeepFilterNet 3 as the AI noise suppression engine.
+
+The application should be optimized to run in real time on Intel 8th Generation CPUs or newer without requiring a GPU.
+
+==================================================
+
+PROJECT GOAL
+
+Develop a Windows executable (.exe) that provides only one feature:
+
+Professional AI microphone noise cancellation.
+
+No echo cancellation.
+No meeting assistant.
+No recording.
+No transcription.
+No AI summaries.
+
+Only microphone noise suppression.
+
+==================================================
+
+MAIN FEATURES
+
+The application should:
+
+• Detect all microphones installed in Windows.
+
+• Allow selecting the input microphone.
+
+• Create a virtual microphone device.
+
+Applications like:
+
+Chrome
+Discord
+Zoom
+Teams
+OBS
+Steam
+Skype
+
+must be able to select this virtual microphone.
+
+Audio flow:
+
+Real Microphone
+
+↓
+
+DeepFilterNet3
+
+↓
+
+Virtual Microphone
+
+↓
+
+Selected Application
+
+==================================================
+
+USER INTERFACE
+
+The interface should be modern and minimalist.
+
+Inspired by Krisp.
+
+Dark Mode.
+
+Rounded corners.
+
+Fluent Design.
+
+Smooth animations.
+
+Windows 11 style.
+
+The UI should include:
+
+--------------------------------------------------
+
+TOP BAR
+
+Application name
+
+Connection status
+
+Settings button
+
+--------------------------------------------------
+
+CENTER
+
+Large microphone icon.
+
+Current microphone.
+
+Noise Cancellation
+
+Toggle ON/OFF
+
+Large animated waveform.
+
+Real-time processing indicator.
+
+CPU usage.
+
+Latency.
+
+Current model.
+
+--------------------------------------------------
+
+BOTTOM
+
+Output level meter.
+
+Input level meter.
+
+Virtual microphone status.
+
+==================================================
+
+SETTINGS
+
+Microphone selection.
+
+Startup with Windows.
+
+Theme:
+
+Dark
+
+Light
+
+Auto
+
+Language support.
+
+Auto-update.
+
+==================================================
+
+AI ENGINE
+
+Use DeepFilterNet 3.
+
+Implement:
+
+Streaming inference.
+
+Frame overlap.
+
+Low-latency buffering.
+
+Windowing.
+
+Real-time enhancement.
+
+No cloud.
+
+Everything must run locally.
+
+==================================================
+
+PERFORMANCE REQUIREMENTS
+
+Target latency:
+
+Below 20 ms.
+
+CPU usage:
+
+Less than 10% on Intel i5-8400.
+
+Memory:
+
+Less than 200 MB.
+
+Audio quality:
+
+48 kHz
+
+16-bit
+
+Mono
+
+Stable without crackling.
+
+==================================================
+
+WINDOWS AUDIO
+
+Use WASAPI.
+
+Support Shared Mode.
+
+Support Exclusive Mode.
+
+Implement:
+
+Audio Capture
+
+Ring Buffer
+
+Worker Thread
+
+Real-time Priority
+
+Audio Render
+
+Virtual Microphone
+
+==================================================
+
+VIRTUAL MICROPHONE
+
+Create a virtual microphone driver compatible with Windows.
+
+The virtual microphone should appear automatically in:
+
+Discord
+
+Chrome
+
+Teams
+
+Zoom
+
+OBS
+
+Games
+
+Any application that allows microphone selection.
+
+==================================================
+
+MULTITHREADING
+
+Use dedicated threads:
+
+Audio Capture Thread
+
+AI Processing Thread
+
+UI Thread
+
+Device Monitoring Thread
+
+==================================================
+
+ERROR HANDLING
+
+Recover automatically if:
+
+Microphone disconnects.
+
+Device changes.
+
+Sample rate changes.
+
+Audio buffer overflow.
+
+==================================================
+
+CODE QUALITY
+
+Use C++20.
+
+CMake.
+
+Modern architecture.
+
+SOLID principles.
+
+Dependency Injection.
+
+RAII.
+
+No global variables.
+
+No spaghetti code.
+
+==================================================
+
+PROJECT STRUCTURE
+
+/src
+
+/audio
+
+/ai
+
+/ui
+
+/driver
+
+/core
+
+/utils
+
+/resources
+
+/tests
+
+==================================================
+
+UI FRAMEWORK
+
+Use Qt 6.
+
+Hardware accelerated.
+
+Fluent animations.
+
+Responsive layout.
+
+==================================================
+
+AI LIBRARIES
+
+DeepFilterNet 3
+
+ONNX Runtime
+
+Intel oneDNN optimizations
+
+SIMD AVX2
+
+==================================================
+
+WINDOWS APIS
+
+WASAPI
+
+MMDevice
+
+COM
+
+SetupAPI
+
+WinRT when appropriate.
+
+==================================================
+
+INSTALLER
+
+Generate an installer.
+
+Install:
+
+Application
+
+Virtual microphone driver
+
+Dependencies
+
+Desktop shortcut
+
+Auto-update service
+
+==================================================
+
+DELIVERABLES
+
+Generate:
+
+Complete source code.
+
+Complete CMake project.
+
+Installer.
+
+Virtual microphone driver.
+
+Modern UI.
+
+Icons.
+
+Assets.
+
+Documentation.
+
+README.
+
+Build instructions.
+
+Performance optimizations.
+
+Unit tests.
+
+==================================================
+
+FINAL GOAL
+
+The final application should feel like a lightweight version of Krisp focused exclusively on microphone noise suppression, delivering professional quality, low CPU usage, minimal latency, and a polished Windows 11 user experience.

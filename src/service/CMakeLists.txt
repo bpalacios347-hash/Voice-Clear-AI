@@ -1,0 +1,2 @@
+add_executable(VoiceClearService main.cpp)
+target_link_libraries(VoiceClearService PRIVATE VoiceClearCore VoiceClearAudio VoiceClearAIModule VoiceClearPlatform VoiceClearUtils)

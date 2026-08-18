@@ -1,0 +1,68 @@
+# Visual Studio & C++ Builds
+build/
+bin/
+obj/
+out/
+x64/
+x86/
+Debug/
+Release/
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.lib
+*.exp
+*.idb
+*.ipch
+*.pch
+*.tlog
+*.lastcodeanalysistype
+*.iobj
+*.ipdb
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# vcpkg & External Prebuilts
+vcpkg_installed/
+vcpkg/
+external/
+
+# Node.js & Website Build Artifacts
+website/node_modules/
+website/dist/
+website/.vite/
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python Environments & Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+src/engine_py/venv/
+src/engine_py/build/
+src/engine_py/dist/
+
+# Certificates & Secrets (Keep template/dummy, exclude private keys)
+*.pfx
+*.p12
+*.key
+
+# Logs & OS Files
+*.log
+logs/
+.DS_Store
+Thumbs.db

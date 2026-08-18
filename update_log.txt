@@ -1,0 +1,2 @@
+Updating drivers for root\VoiceClearVAD from C:\Users\Byron\Desktop\VoiceClearAI\src\driver\sys\x64\Release\VoiceClearVAD\VoiceClearVAD.inf.
+Drivers installed successfully.
