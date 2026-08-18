@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Download, Globe, Menu, X, MessageCircle } from 'lucide-react';
+import { Globe, Menu, X, MessageCircle } from 'lucide-react';
 
-export default function Navbar({ lang, setLang, t, onOpenDownload }) {
+export default function Navbar({ lang, setLang, t }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -64,15 +64,6 @@ export default function Navbar({ lang, setLang, t, onOpenDownload }) {
             >
               <Globe className="w-3.5 h-3.5 text-brand-cyan" />
               <span className="font-mono uppercase font-bold">{lang}</span>
-            </button>
-
-            {/* Download CTA */}
-            <button
-              onClick={onOpenDownload}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-white transition-all hover:border-slate-600"
-            >
-              <Download className="w-3.5 h-3.5 text-brand-cyan" />
-              <span>{t.nav.downloadFree}</span>
             </button>
 
             {/* WhatsApp CTA */}
@@ -152,13 +143,6 @@ export default function Navbar({ lang, setLang, t, onOpenDownload }) {
           </div>
 
           <div className="pt-4 border-t border-brand-border flex flex-col gap-2.5">
-            <button
-              onClick={() => { setMobileMenuOpen(false); onOpenDownload(); }}
-              className="w-full py-3 rounded-xl bg-brand-card border border-brand-border text-sm font-semibold text-white flex items-center justify-center gap-2"
-            >
-              <Download className="w-4 h-4 text-brand-cyan" />
-              {t.nav.downloadFree}
-            </button>
             <button
               onClick={() => { setMobileMenuOpen(false); openWhatsApp(); }}
               className="w-full py-3 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#25D366]/20"

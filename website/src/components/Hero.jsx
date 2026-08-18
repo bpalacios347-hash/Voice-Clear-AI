@@ -1,9 +1,14 @@
 import React from 'react';
-import { Download, ShieldCheck, Zap, Cpu, Sparkles, CheckCircle2, MessageCircle } from 'lucide-react';
+import { ShieldCheck, Zap, Cpu, Sparkles, CheckCircle2, MessageCircle } from 'lucide-react';
 
-export default function Hero({ t, onOpenDownload }) {
-  const openWhatsApp = () => {
-    const text = "Hola, quiero adquirir la licencia de Voice Clear AI ($6.99 USD).";
+export default function Hero({ t }) {
+  const openWhatsAppSingle = () => {
+    const text = "Hola, quiero comprar la licencia de Voice Clear AI (1 Dispositivo - $6.99 USD).";
+    window.open(`https://wa.me/50587414791?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  const openWhatsAppCombo = () => {
+    const text = "Hola, quiero comprar el Combo de Voice Clear AI (2 Dispositivos - $10 USD).";
     window.open(`https://wa.me/50587414791?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -41,27 +46,19 @@ export default function Hero({ t, onOpenDownload }) {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-8">
             <button
-              onClick={onOpenDownload}
-              className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-cyan via-brand-accent to-brand-mint text-slate-950 font-extrabold text-base shadow-xl shadow-brand-cyan/25 hover:shadow-brand-cyan/40 transform hover:-translate-y-1 transition-all duration-200 group"
+              onClick={openWhatsAppSingle}
+              className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-extrabold text-base shadow-xl shadow-[#25D366]/25 hover:opacity-95 transform hover:-translate-y-1 transition-all duration-200"
             >
-              <Download className="w-5 h-5 group-hover:animate-bounce" />
-              <div className="flex flex-col text-left">
-                <span>{t.hero.ctaDownload}</span>
-                <span className="text-[10px] font-mono font-medium text-slate-900 tracking-tight opacity-90">
-                  {t.hero.ctaDownloadSub}
-                </span>
-              </div>
+              <MessageCircle className="w-5 h-5 fill-current" />
+              <span>{t.hero.ctaSingle}</span>
             </button>
 
             <button
-              onClick={openWhatsApp}
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-brand-card hover:bg-brand-cardHover border border-brand-borderLight text-white font-bold text-base shadow-lg transition-all transform hover:-translate-y-1"
+              onClick={openWhatsAppCombo}
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-brand-card hover:bg-brand-cardHover border border-brand-cyan/40 text-white font-bold text-base shadow-lg transition-all transform hover:-translate-y-1"
             >
-              <MessageCircle className="w-5 h-5 text-[#25D366] fill-current" />
-              <span>{t.hero.ctaPricing}</span>
-              <span className="px-2.5 py-0.5 rounded-full bg-[#25D366]/20 text-[#25D366] text-xs font-mono font-bold border border-[#25D366]/40">
-                $6.99 USD
-              </span>
+              <Sparkles className="w-5 h-5 text-brand-mint" />
+              <span>{t.hero.ctaCombo}</span>
             </button>
           </div>
 

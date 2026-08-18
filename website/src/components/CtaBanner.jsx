@@ -1,9 +1,14 @@
 import React from 'react';
-import { Download, MessageCircle, Sparkles } from 'lucide-react';
+import { MessageCircle, Sparkles } from 'lucide-react';
 
-export default function CtaBanner({ t, onOpenDownload }) {
-  const openWhatsApp = () => {
-    const text = "Hola, quiero comprar la licencia de Voice Clear AI ($6.99 USD).";
+export default function CtaBanner({ t }) {
+  const openWhatsAppSingle = () => {
+    const text = "Hola, quiero comprar la licencia de Voice Clear AI (1 Dispositivo - $6.99 USD).";
+    window.open(`https://wa.me/50587414791?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  const openWhatsAppCombo = () => {
+    const text = "Hola, quiero comprar el Combo de Voice Clear AI (2 Dispositivos - $10 USD).";
     window.open(`https://wa.me/50587414791?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -29,19 +34,19 @@ export default function CtaBanner({ t, onOpenDownload }) {
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <button
-                onClick={onOpenDownload}
-                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-white hover:bg-slate-100 text-slate-950 font-extrabold text-base shadow-xl transition-all transform hover:-translate-y-0.5"
+                onClick={openWhatsAppSingle}
+                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-extrabold text-base shadow-xl shadow-[#25D366]/30 hover:opacity-95 transition-all transform hover:-translate-y-0.5"
               >
-                <Download className="w-5 h-5 text-brand-indigo" />
-                <span>{t.ctaBanner.buttonDownload}</span>
+                <MessageCircle className="w-5 h-5 fill-current" />
+                <span>{t.ctaBanner.buttonSingle}</span>
               </button>
 
               <button
-                onClick={openWhatsApp}
-                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-extrabold text-base shadow-xl shadow-[#25D366]/30 transition-all transform hover:-translate-y-0.5"
+                onClick={openWhatsAppCombo}
+                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-brand-card hover:bg-brand-cardHover border border-brand-cyan/40 text-white font-extrabold text-base shadow-xl transition-all transform hover:-translate-y-0.5"
               >
-                <MessageCircle className="w-5 h-5 fill-current" />
-                <span>{t.ctaBanner.buttonPro}</span>
+                <Sparkles className="w-5 h-5 text-brand-mint" />
+                <span>{t.ctaBanner.buttonCombo}</span>
               </button>
             </div>
           </div>

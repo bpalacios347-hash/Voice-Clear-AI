@@ -1,7 +1,7 @@
 import React from 'react';
 import { Check, Sparkles, ShieldCheck, Headphones, MessageCircle, ArrowRight } from 'lucide-react';
 
-export default function PricingSection({ t, onOpenDownload }) {
+export default function PricingSection({ t }) {
   const handleWhatsAppRedirect = (msg) => {
     const defaultMsg = msg || "Hola, quiero adquirir la licencia de Voice Clear AI.";
     const url = `https://wa.me/50587414791?text=${encodeURIComponent(defaultMsg)}`;
@@ -110,21 +110,10 @@ export default function PricingSection({ t, onOpenDownload }) {
           })}
         </div>
 
-        {/* Free trial alternative & Guarantees */}
-        <div className="mt-14 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-center gap-6 text-center">
-          <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-300 font-medium">
-            <ShieldCheck className="w-5 h-5 text-brand-mint shrink-0" />
-            <span>{t.pricing.moneyBack}</span>
-          </div>
-
-          <div className="hidden sm:block text-slate-600">|</div>
-
-          <button
-            onClick={onOpenDownload}
-            className="text-xs sm:text-sm text-brand-cyan hover:underline font-mono"
-          >
-            ¿Prefieres probar primero? Haz clic aquí para descargar la demo gratuita.
-          </button>
+        {/* Guarantees */}
+        <div className="mt-14 pt-8 border-t border-slate-800/80 flex items-center justify-center gap-2 text-center text-xs sm:text-sm text-slate-300 font-medium">
+          <ShieldCheck className="w-5 h-5 text-brand-mint shrink-0" />
+          <span>{t.pricing.moneyBack}</span>
         </div>
 
       </div>
