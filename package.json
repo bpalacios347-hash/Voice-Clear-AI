@@ -1,0 +1,11 @@
+{
+  "name": "voice-clear-ai-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "install-site": "npm --prefix website install",
+    "build": "npm --prefix website install && npm --prefix website run build",
+    "dev": "npm --prefix website run dev",
+    "preview": "npm --prefix website run preview"
+  }
+}
