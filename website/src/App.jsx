@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { translations } from './translations';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import AudioComparator from './components/AudioComparator';
 import AppSimulator from './components/AppSimulator';
 import Features from './components/Features';
 import Benchmarks from './components/Benchmarks';
@@ -30,10 +29,6 @@ export default function App() {
       {/* Main Content Sections */}
       <main>
         <Hero
-          t={t}
-        />
-
-        <AudioComparator
           t={t}
         />
 

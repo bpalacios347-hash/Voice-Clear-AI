@@ -47,7 +47,6 @@ export default function Navbar({ lang, setLang, t }) {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium text-slate-300">
             <a href="#features" className="hover:text-brand-cyan transition-colors">{t.nav.features}</a>
-            <a href="#demo" className="hover:text-brand-cyan transition-colors">{t.nav.demo}</a>
             <a href="#simulator" className="hover:text-brand-cyan transition-colors">{t.nav.simulator}</a>
             <a href="#benchmarks" className="hover:text-brand-cyan transition-colors">{t.nav.benchmarks}</a>
             <a href="#pricing" className="hover:text-brand-cyan transition-colors">{t.nav.pricing}</a>
@@ -114,13 +113,6 @@ export default function Navbar({ lang, setLang, t }) {
               className="px-3 py-2 rounded-lg hover:bg-brand-card text-slate-200"
             >
               {t.nav.features}
-            </a>
-            <a 
-              href="#demo" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2 rounded-lg hover:bg-brand-card text-slate-200"
-            >
-              {t.nav.demo}
             </a>
             <a 
               href="#simulator" 

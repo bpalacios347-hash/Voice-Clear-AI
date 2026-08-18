@@ -61,7 +61,6 @@ export default function Footer({ t }) {
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm">
               <li><a href="#features" className="hover:text-brand-cyan transition-colors">{t.footer.features}</a></li>
-              <li><a href="#demo" className="hover:text-brand-cyan transition-colors">{t.footer.demo}</a></li>
               <li><a href="#pricing" className="hover:text-brand-cyan transition-colors">{t.footer.pricing}</a></li>
               <li><a href="#simulator" className="hover:text-brand-cyan transition-colors">Simulador Windows</a></li>
             </ul>
