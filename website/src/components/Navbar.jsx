@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Sparkles, Download, ShoppingBag, Globe, Github, Menu, X } from 'lucide-react';
+import { Download, Globe, Menu, X, MessageCircle } from 'lucide-react';
 
-export default function Navbar({ lang, setLang, t, onOpenDownload, onOpenCheckout }) {
+export default function Navbar({ lang, setLang, t, onOpenDownload }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -13,10 +13,15 @@ export default function Navbar({ lang, setLang, t, onOpenDownload, onOpenCheckou
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const openWhatsApp = (msg) => {
+    const text = msg || "Hola, quiero información sobre Voice Clear AI ($6.99 USD).";
+    window.open(`https://wa.me/50587414791?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled 
-        ? 'bg-brand-darker/90 backdrop-blur-md border-b border-brand-border py-3 shadow-2xl shadow-black/50' 
+        ? 'bg-brand-darker/95 backdrop-blur-md border-b border-brand-border py-3 shadow-2xl shadow-black/50' 
         : 'bg-transparent py-5'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,17 +66,6 @@ export default function Navbar({ lang, setLang, t, onOpenDownload, onOpenCheckou
               <span className="font-mono uppercase font-bold">{lang}</span>
             </button>
 
-            {/* GitHub Repo */}
-            <a
-              href="https://github.com/bpalacios347-hash/Voice-Clear-AI"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-card hover:bg-brand-cardHover border border-brand-border text-xs font-medium text-slate-300 hover:text-white transition-all"
-            >
-              <Github className="w-4 h-4" />
-              <span className="font-mono">GitHub</span>
-            </a>
-
             {/* Download CTA */}
             <button
               onClick={onOpenDownload}
@@ -81,12 +75,12 @@ export default function Navbar({ lang, setLang, t, onOpenDownload, onOpenCheckou
               <span>{t.nav.downloadFree}</span>
             </button>
 
-            {/* Buy Pro CTA */}
+            {/* WhatsApp CTA */}
             <button
-              onClick={() => onOpenCheckout('pro')}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-brand-cyan to-brand-mint hover:opacity-90 text-xs font-bold text-slate-950 shadow-lg shadow-brand-cyan/20 transition-all transform hover:-translate-y-0.5"
+              onClick={() => openWhatsApp()}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:opacity-95 text-xs font-bold text-white shadow-lg shadow-[#25D366]/20 transition-all transform hover:-translate-y-0.5"
             >
-              <ShoppingBag className="w-3.5 h-3.5" />
+              <MessageCircle className="w-4 h-4 fill-current" />
               <span>{t.nav.buyPro}</span>
             </button>
           </div>
@@ -166,21 +160,12 @@ export default function Navbar({ lang, setLang, t, onOpenDownload, onOpenCheckou
               {t.nav.downloadFree}
             </button>
             <button
-              onClick={() => { setMobileMenuOpen(false); onOpenCheckout('pro'); }}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-brand-cyan to-brand-mint text-slate-950 font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-cyan/20"
+              onClick={() => { setMobileMenuOpen(false); openWhatsApp(); }}
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#25D366]/20"
             >
-              <ShoppingBag className="w-4 h-4" />
+              <MessageCircle className="w-4 h-4 fill-current" />
               {t.nav.buyPro}
             </button>
-            <a
-              href="https://github.com/bpalacios347-hash/Voice-Clear-AI"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono text-slate-400 flex items-center justify-center gap-2"
-            >
-              <Github className="w-4 h-4" />
-              github.com/bpalacios347-hash/Voice-Clear-AI
-            </a>
           </div>
         </div>
       )}

@@ -1,15 +1,15 @@
 import React from 'react';
-import { Github, Shield, Heart } from 'lucide-react';
+import { Mail, MessageCircle, ShieldCheck, Heart } from 'lucide-react';
 
 export default function Footer({ t }) {
   return (
     <footer className="bg-brand-darker border-t border-brand-border py-16 text-slate-400 text-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           
           {/* Logo & Tagline */}
-          <div className="md:col-span-2 space-y-4">
+          <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-indigo to-brand-cyan p-0.5 shadow-md">
                 <div className="w-full h-full bg-brand-dark rounded-[6px] flex items-center justify-center">
@@ -23,20 +23,38 @@ export default function Footer({ t }) {
             <p className="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed">
               {t.footer.tagline}
             </p>
-            <div className="pt-2">
-              <a
-                href="https://github.com/bpalacios347-hash/Voice-Clear-AI"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-card hover:bg-brand-cardHover border border-brand-border text-xs font-mono text-slate-300 transition-colors"
-              >
-                <Github className="w-4 h-4 text-brand-cyan" />
-                <span>github.com/bpalacios347-hash/Voice-Clear-AI</span>
-              </a>
-            </div>
           </div>
 
-          {/* Column: Product */}
+          {/* Column: Contacto Directo */}
+          <div className="space-y-3">
+            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">
+              {t.footer.contactTitle}
+            </h4>
+            <ul className="space-y-2.5 text-xs sm:text-sm">
+              <li>
+                <a 
+                  href="mailto:bpalacios347@gmail.com" 
+                  className="flex items-center gap-2 text-slate-300 hover:text-brand-cyan transition-colors"
+                >
+                  <Mail className="w-4 h-4 text-brand-cyan shrink-0" />
+                  <span className="font-mono">bpalacios347@gmail.com</span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://wa.me/50587414791" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center gap-2 text-slate-300 hover:text-[#25D366] transition-colors"
+                >
+                  <MessageCircle className="w-4 h-4 text-[#25D366] shrink-0" />
+                  <span className="font-mono">+505 8741 4791</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column: Product Navigation */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">
               {t.footer.product}
@@ -49,54 +67,22 @@ export default function Footer({ t }) {
             </ul>
           </div>
 
-          {/* Column: Resources */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">
-              {t.footer.resources}
-            </h4>
-            <ul className="space-y-2 text-xs sm:text-sm">
-              <li>
-                <a 
-                  href="https://github.com/bpalacios347-hash/Voice-Clear-AI/blob/main/docs/ArchitectureOverview.md" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-brand-cyan transition-colors"
-                >
-                  {t.footer.docs}
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://github.com/bpalacios347-hash/Voice-Clear-AI/blob/main/benchmark_results.json" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-brand-cyan transition-colors"
-                >
-                  {t.footer.benchmarks}
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://github.com/bpalacios347-hash/Voice-Clear-AI/blob/main/docs/ReleaseNotes.md" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-brand-cyan transition-colors"
-                >
-                  {t.footer.releaseNotes}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column: Legal & Tech */}
+          {/* Column: Garantía & Legal */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">
               {t.footer.legal}
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm">
-              <li><span className="hover:text-slate-300 cursor-pointer">{t.footer.privacy}</span></li>
-              <li><span className="hover:text-slate-300 cursor-pointer">{t.footer.terms}</span></li>
-              <li><span className="hover:text-slate-300 cursor-pointer">{t.footer.license} (MIT)</span></li>
+              <li className="flex items-center gap-1.5 text-brand-mint">
+                <ShieldCheck className="w-4 h-4 shrink-0" />
+                <span>{t.footer.warranty}</span>
+              </li>
+              <li className="text-slate-300">
+                <span>{t.footer.support}</span>
+              </li>
+              <li>
+                <span className="text-slate-400">{t.footer.license}</span>
+              </li>
             </ul>
           </div>
 

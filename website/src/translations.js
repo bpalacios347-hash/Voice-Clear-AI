@@ -8,7 +8,8 @@ export const translations = {
       pricing: "Precios",
       faq: "Preguntas",
       downloadFree: "Descargar Gratis",
-      buyPro: "Comprar Pro"
+      buyPro: "Comprar por WhatsApp ($6.99)",
+      contact: "Contacto"
     },
     hero: {
       badge: "Voice Clear AI v1.0 — Motor DeepFilterNet3 en CPU",
@@ -16,9 +17,9 @@ export const translations = {
       titleHighlight: "Cero Ruido.",
       titleEnd: "100% Privado en tu PC.",
       subtitle: "Elimina teclados mecánicos, ventiladores, ecos y ruidos de fondo en tiempo real con IA. Menos de 10ms de latencia, 0% de uso de GPU y sin enviar un solo byte de audio a la nube.",
-      ctaDownload: "Descargar para Windows",
-      ctaDownloadSub: "Windows 10 / 11 (64-bit) • Gratis",
-      ctaPricing: "Ver Planes Pro",
+      ctaDownload: "Descargar Prueba Gratis",
+      ctaDownloadSub: "Windows 10 / 11 (64-bit)",
+      ctaPricing: "Obtener Licencia ($6.99)",
       stats: [
         { label: "Reducción de Ruido", value: "-51.5 dB" },
         { label: "Latencia en Tiempo Real", value: "9.8 ms" },
@@ -71,7 +72,7 @@ export const translations = {
         {
           icon: "Zap",
           title: "Ultra-Baja Latencia (<10ms)",
-          desc: "Con un pipeline optimizado en C++ y buffers lock-free SPSC de baja latencia, tu voz llega a Discord, Twitch o Zoom sin ningún desfase o eco perceptible."
+          desc: "Con un pipeline optimizado en C++ y buffers lock-free SPSC de baja latencia, tu voz llega a Discord, Twitch, Zoom o Boostlingo sin ningún desfase o eco perceptible."
         },
         {
           icon: "Cpu",
@@ -144,7 +145,7 @@ export const translations = {
         },
         {
           metric: "Modelo de Precio",
-          vc: "Pago Único / Accesible",
+          vc: "Desde $6.99 (Pago Único)",
           krisp: "$8 - $12/mes recurrente",
           rtx: "Gratis pero GPU costosa",
           discord: "Limitado a la app"
@@ -156,10 +157,10 @@ export const translations = {
       title: "Funciona con todas tus aplicaciones favoritas",
       subtitle: "Solo selecciona 'Voice Clear Virtual Mic' en la configuración de audio de tu software.",
       apps: [
+        { name: "Boostlingo", category: "Interpretación & Teletrabajo" },
         { name: "Discord", category: "Gaming & Comunidades" },
         { name: "OBS Studio", category: "Streaming & Grabación" },
         { name: "Zoom", category: "Reuniones de Negocios" },
-        { name: "Google Meet", category: "Videollamadas" },
         { name: "Microsoft Teams", category: "Colaboración Empresarial" },
         { name: "Twitch Studio", category: "Transmisiones en Vivo" },
         { name: "Slack", category: "Audio Huddles" },
@@ -184,131 +185,95 @@ export const translations = {
         {
           step: "03",
           title: "Elige Voice Clear en tus Apps",
-          desc: "En Discord, Zoom, OBS o Teams, configura tu dispositivo de entrada como 'Voice Clear Virtual Mic'. ¡Listo!"
+          desc: "En Boostlingo, Discord, Zoom, OBS o Teams, configura tu dispositivo de entrada como 'Voice Clear Virtual Mic'. ¡Listo!"
         }
       ]
     },
     pricing: {
       tag: "PLANES Y LICENCIAS",
-      title: "Precios claros y sin sorpresas",
-      subtitle: "Olvídate de costosas suscripciones mensuales. Consigue tu licencia definitiva para Windows.",
+      title: "Precios accesibles, pago único de por vida",
+      subtitle: "Sin suscripciones mensuales recurrentes. Adquiere tu licencia definitiva con atención directa por WhatsApp.",
       billedOnce: "Pago único de por vida",
-      popularTag: "MÁS POPULAR",
+      popularTag: "MEJOR VALOR",
       plans: [
         {
-          id: "free",
-          name: "Starter Free",
-          price: "$0",
-          period: "Para siempre",
-          desc: "Ideal para probar el poder de la cancelación de audio en tu setup personal.",
-          buttonText: "Descargar Gratis",
+          id: "single",
+          name: "Licencia 1 Dispositivo",
+          price: "$6.99",
+          oldPrice: "$15",
+          period: "Pago único de por vida",
+          desc: "La solución perfecta para tu PC o Laptop de trabajo y estudio personal.",
+          buttonText: "Comprar por WhatsApp ($6.99)",
+          whatsappMsg: "Hola, quiero comprar la licencia de Voice Clear AI (1 Dispositivo - $6.99 USD).",
           features: [
-            "Cancelación de ruido básica en tiempo real",
-            "Soporte para 1 micrófono físico",
-            "Audio a 48 kHz",
-            "Driver virtual para Windows",
-            "Soporte de la comunidad"
+            "Licencia vitalicia para 1 PC (Windows 10 / 11)",
+            "Supresión extrema DeepFilterNet3 (-51.5 dB)",
+            "1 Año de Soporte Técnico Directo",
+            "Garantía de reembolso de 5 días",
+            "Latencia ultra-baja (<10ms) en CPU AVX2",
+            "Compatible con Boostlingo, Discord, Zoom, Teams, OBS",
+            "Actualizaciones de por vida incluidas"
           ],
           featured: false
         },
         {
-          id: "pro",
-          name: "Pro Lifetime",
-          price: "$29",
-          oldPrice: "$59",
-          period: "Pago único para siempre",
-          desc: "La mejor opción para streamers, profesionales remotos, gamers y podcasters.",
-          buttonText: "Obtener Licencia Pro",
+          id: "combo",
+          name: "Combo 2 Dispositivos",
+          price: "$10",
+          oldPrice: "$25",
+          period: "Pago único de por vida",
+          desc: "Ahorra al máximo equipando tu PC de escritorio y tu Laptop personal o familiar.",
+          buttonText: "Comprar Combo por WhatsApp ($10)",
+          whatsappMsg: "Hola, quiero comprar el Combo de Voice Clear AI (2 Dispositivos - $10 USD).",
           features: [
+            "Licencia vitalicia para 2 PCs (Windows 10 / 11)",
             "Supresión extrema DeepFilterNet3 (-51.5 dB)",
-            "Latencia ultra-baja (<10ms) perfil AVX2",
-            "Todas las actualizaciones futuras v1.x y v2.x",
-            "Licencia vitalicia para hasta 2 PCs personales",
-            "Eliminación de teclado mecánico, tráfico y ventiladores",
-            "Soporte prioritario por email"
+            "1 Año de Soporte Técnico Prioritario",
+            "Garantía de reembolso de 5 días",
+            "Latencia ultra-baja (<10ms) en CPU AVX2",
+            "Compatible con Boostlingo, Discord, Zoom, Teams, OBS",
+            "Actualizaciones de por vida incluidas"
           ],
           featured: true
-        },
-        {
-          id: "studio",
-          name: "Studio & Commercial",
-          price: "$69",
-          oldPrice: "$120",
-          period: "Pago único comercial",
-          desc: "Para estudios de producción, agencias de contenido y creadores con múltiples equipos.",
-          buttonText: "Comprar Licencia Studio",
-          features: [
-            "Todo lo incluido en el plan Pro",
-            "Licencia para uso comercial / monetización",
-            "Instalación en hasta 5 dispositivos",
-            "Curvas de ecualización y presets de voz pro",
-            "Soporte VIP por Discord y asistencia técnica directa",
-            "Acceso anticipado a nuevos modelos de IA"
-          ],
-          featured: false
         }
       ],
-      moneyBack: "Garantía de reembolso de 30 días sin preguntas."
-    },
-    testimonials: {
-      tag: "TESTIMONIOS",
-      title: "Lo que dicen quienes ya no tienen ruido de fondo",
-      items: [
-        {
-          name: "Carlos Mendoza",
-          role: "Streamer en Twitch & Creador de Contenido",
-          avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-          comment: "Uso un teclado mecánico con switches azules muy ruidosos y el ventilador en verano al máximo. Voice Clear AI eliminó todo por completo sin tocar mi tarjeta gráfica ni bajar FPS en mis juegos."
-        },
-        {
-          name: "Elena Rostova",
-          role: "Senior Engineering Manager (Trabajo Remoto)",
-          avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80",
-          comment: "Tengo reuniones todo el día con directivos. Mis dos perros ladran frecuentemente y con Voice Clear AI nadie en mis llamadas de Teams o Zoom escucha nada más que mi voz limpia. Imprescindible."
-        },
-        {
-          name: "Marcos Del Valle",
-          role: "Host de Podcast 'Tech Pulse'",
-          avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
-          comment: "La calidad a 48kHz es asombrosa. Otros supresores hacen que tu voz suene como debajo del agua o robotizada. Voice Clear AI mantiene el cuerpo natural y los graves cálidos de mi voz."
-        }
-      ]
+      moneyBack: "Garantía de reembolso de 5 días y 1 año de soporte técnico incluido."
     },
     faq: {
       tag: "PREGUNTAS FRECUENTES",
       title: "Resolvemos todas tus dudas",
       items: [
         {
+          q: "¿Cómo es el proceso de compra por WhatsApp?",
+          a: "Al hacer clic en el botón de compra, te pondrás en contacto directo con nosotros por WhatsApp (+505 8741 4791). Te facilitamos los métodos de pago disponibles y te entregamos inmediatamente tu clave de activación junto al instalador completo."
+        },
+        {
+          q: "¿Qué incluye la garantía de 5 días?",
+          a: "Si durante los primeros 5 días el software no cumple con tus expectativas o no es compatible con tu equipo, te devolvemos el 100% de tu dinero sin complicaciones."
+        },
+        {
+          q: "¿Qué incluye el año de soporte técnico?",
+          a: "Tendrás asistencia personalizada directa por WhatsApp y correo electrónico para ayudarte en la instalación, configuración del micrófono virtual y calibración del audio durante 1 año completo."
+        },
+        {
           q: "¿Requiere conexión a internet para funcionar?",
           a: "No. Voice Clear AI procesa el 100% del audio de manera local en tu procesador (CPU) utilizando el motor ONNX Runtime con aceleración AVX2. No requiere internet y tus audios nunca se transmiten."
         },
         {
-          q: "¿Necesito una tarjeta gráfica dedicada potente como NVIDIA RTX?",
-          a: "No. A diferencia de soluciones que consumen un 15-25% de tu tarjeta de video, Voice Clear AI está hiper-optimizado para la CPU (Intel 8va generación en adelante o AMD Ryzen equivalente). Tu GPU queda 100% libre para juegos o renderizado."
-        },
-        {
-          q: "¿Es compatible con Discord, Zoom, OBS y Google Meet?",
+          q: "¿Es compatible con Boostlingo, Zoom, Discord y Teams?",
           a: "Sí. Voice Clear AI crea un dispositivo de audio virtual llamado 'Voice Clear Virtual Mic' en Windows a través del driver AVStream. Puedes seleccionarlo en cualquier programa que admita un micrófono."
         },
         {
-          q: "¿Qué nivel de latencia introduce?",
-          a: "Nuestras mediciones p50 registran solo 9.84 milisegundos de tiempo de procesamiento por bloque de 480 muestras a 48kHz, lo cual es totalmente imperceptible para el oído humano y no causa desfase con la cámara web."
-        },
-        {
-          q: "¿Cómo recibo mi clave de licencia tras la compra?",
-          a: "Inmediatamente después de completar tu pago seguro, recibirás un correo con tu clave de activación de por vida y el enlace directo de descarga del instalador Pro."
-        },
-        {
-          q: "¿Qué sistemas operativos son compatibles?",
-          a: "Actualmente es compatible de forma nativa con Windows 10 (64-bit) y Windows 11 (64-bit)."
+          q: "¿Necesito una tarjeta gráfica dedicada potente como NVIDIA RTX?",
+          a: "No. A diferencia de soluciones que consumen tu tarjeta de video, Voice Clear AI está hiper-optimizado para la CPU (Intel 8va generación en adelante o AMD Ryzen equivalente). Tu GPU queda libre."
         }
       ]
     },
     ctaBanner: {
       title: "¿Listo para hablar con la máxima claridad?",
-      subtitle: "Únete a miles de streamers, profesionales y creadores que ya disfrutan de un audio cristalino sin ruidos molestos.",
-      buttonDownload: "Descargar Gratis para Windows",
-      buttonPro: "Comprar Licencia Pro ($29 USD)"
+      subtitle: "Consigue tu licencia definitiva por solo $6.99 USD o el combo de 2 dispositivos por $10 USD con soporte técnico incluido.",
+      buttonDownload: "Descargar Prueba Gratis",
+      buttonPro: "Comprar por WhatsApp ($6.99 USD)"
     },
     footer: {
       tagline: "Cancelación de ruido en tiempo real impulsada por Inteligencia Artificial acústica para Windows.",
@@ -317,16 +282,16 @@ export const translations = {
       demo: "Demo A/B",
       pricing: "Precios",
       downloads: "Descargas",
-      resources: "Recursos",
-      docs: "Documentación",
-      github: "Repositorio GitHub",
-      benchmarks: "Reporte de Benchmarks",
-      releaseNotes: "Notas de la Versión",
-      legal: "Legal",
-      privacy: "Privacidad",
-      terms: "Términos de Servicio",
+      contactTitle: "Contacto & Soporte",
+      emailLabel: "Correo Electrónico:",
+      emailValue: "bpalacios347@gmail.com",
+      whatsappLabel: "WhatsApp:",
+      whatsappValue: "+505 8741 4791",
+      legal: "Garantía & Soporte",
+      warranty: "Garantía de reembolso de 5 días",
+      support: "1 Año de Soporte Técnico",
       license: "Licencia de Software",
-      copyright: "© 2026 Voice Clear AI. Todos los derechos reservados. Desarrollado con DeepFilterNet3 y WDK."
+      copyright: "© 2026 Voice Clear AI. Todos los derechos reservados. Contacto: bpalacios347@gmail.com"
     },
     modals: {
       download: {
@@ -338,17 +303,6 @@ export const translations = {
         step1: "1. Ejecuta el archivo instalador 'VoiceClearAI_Setup.exe'.",
         step2: "2. Acepta la instalación del driver virtual seguro.",
         step3: "3. Abre la aplicación, selecciona tu micrófono y disfruta de tu voz cristalina."
-      },
-      checkout: {
-        title: "Adquirir Licencia",
-        subtitle: "Pago seguro único de por vida con garantía de 30 días",
-        planLabel: "Plan Seleccionado",
-        emailPlaceholder: "tu-correo@ejemplo.com",
-        cardPlaceholder: "Número de tarjeta",
-        expiryPlaceholder: "MM/AA",
-        cvcPlaceholder: "CVC",
-        payButton: "Pagar y Obtener Clave de Activación",
-        secureNote: "🔒 Encriptación SSL de 256 bits. Aceptamos Tarjetas de Crédito, Débito y PayPal."
       }
     }
   },
@@ -361,7 +315,8 @@ export const translations = {
       pricing: "Pricing",
       faq: "FAQ",
       downloadFree: "Download Free",
-      buyPro: "Buy Pro"
+      buyPro: "Buy via WhatsApp ($6.99)",
+      contact: "Contact"
     },
     hero: {
       badge: "Voice Clear AI v1.0 — DeepFilterNet3 CPU Engine",
@@ -369,9 +324,9 @@ export const translations = {
       titleHighlight: "Zero Noise.",
       titleEnd: "100% Private On-Device.",
       subtitle: "Eliminate mechanical keyboard clatter, fan whirrs, room echoes, and background noise in real-time with AI. Sub-10ms latency, 0% GPU usage, and zero audio data sent to the cloud.",
-      ctaDownload: "Download for Windows",
-      ctaDownloadSub: "Windows 10 / 11 (64-bit) • Free",
-      ctaPricing: "View Pro Plans",
+      ctaDownload: "Download Free Trial",
+      ctaDownloadSub: "Windows 10 / 11 (64-bit)",
+      ctaPricing: "Get License ($6.99)",
       stats: [
         { label: "Noise Reduction", value: "-51.5 dB" },
         { label: "Real-Time Latency", value: "9.8 ms" },
@@ -424,7 +379,7 @@ export const translations = {
         {
           icon: "Zap",
           title: "Ultra-Low Latency (<10ms)",
-          desc: "Featuring a high-performance C++ pipeline and lock-free SPSC ring buffers, your voice streams to Discord, Twitch, or Zoom without perceptible delay."
+          desc: "Featuring a high-performance C++ pipeline and lock-free SPSC ring buffers, your voice streams to Boostlingo, Discord, Twitch, or Zoom without perceptible delay."
         },
         {
           icon: "Cpu",
@@ -497,7 +452,7 @@ export const translations = {
         },
         {
           metric: "Pricing Model",
-          vc: "One-Time / Affordable",
+          vc: "From $6.99 (One-Time)",
           krisp: "$8 - $12/mo recurring",
           rtx: "Free but expensive GPU",
           discord: "App restricted"
@@ -509,10 +464,10 @@ export const translations = {
       title: "Seamlessly Compatible with All Your Apps",
       subtitle: "Just select 'Voice Clear Virtual Mic' in the audio preferences of your favorite software.",
       apps: [
+        { name: "Boostlingo", category: "Interpreting & Remote Work" },
         { name: "Discord", category: "Gaming & Communities" },
         { name: "OBS Studio", category: "Streaming & Recording" },
         { name: "Zoom", category: "Executive Meetings" },
-        { name: "Google Meet", category: "Video Calls" },
         { name: "Microsoft Teams", category: "Enterprise Collaboration" },
         { name: "Twitch Studio", category: "Live Broadcasts" },
         { name: "Slack", category: "Team Huddles" },
@@ -537,131 +492,95 @@ export const translations = {
         {
           step: "03",
           title: "Choose Voice Clear in Your Apps",
-          desc: "Set your input device to 'Voice Clear Virtual Mic' in Discord, Zoom, OBS, or Teams. You're done!"
+          desc: "Set your input device to 'Voice Clear Virtual Mic' in Boostlingo, Discord, Zoom, OBS, or Teams. You're done!"
         }
       ]
     },
     pricing: {
       tag: "PLANS & LICENSES",
-      title: "Transparent, One-Time Pricing",
-      subtitle: "Say goodbye to costly monthly subscriptions. Secure your lifetime Windows license.",
+      title: "Affordable One-Time Pricing",
+      subtitle: "No expensive recurring monthly subscriptions. Secure your lifetime license with direct WhatsApp support.",
       billedOnce: "One-time lifetime purchase",
-      popularTag: "MOST POPULAR",
+      popularTag: "BEST VALUE",
       plans: [
         {
-          id: "free",
-          name: "Starter Free",
-          price: "$0",
-          period: "Forever",
-          desc: "Ideal for testing the noise cancellation capabilities on your home setup.",
-          buttonText: "Download Free",
+          id: "single",
+          name: "1 Device License",
+          price: "$6.99",
+          oldPrice: "$15",
+          period: "One-time lifetime payment",
+          desc: "The perfect solution for your personal work or study PC/Laptop.",
+          buttonText: "Buy via WhatsApp ($6.99)",
+          whatsappMsg: "Hello, I want to purchase the Voice Clear AI license (1 Device - $6.99 USD).",
           features: [
-            "Basic real-time noise suppression",
-            "Support for 1 physical microphone",
-            "48 kHz high fidelity audio",
-            "Windows virtual driver included",
-            "Community support"
+            "Lifetime license for 1 PC (Windows 10 / 11)",
+            "Extreme DeepFilterNet3 suppression (-51.5 dB)",
+            "1 Year Direct Technical Support",
+            "5-Day Money-Back Guarantee",
+            "Ultra-low latency (<10ms) AVX2 profile",
+            "Compatible with Boostlingo, Discord, Zoom, Teams, OBS",
+            "Lifetime updates included"
           ],
           featured: false
         },
         {
-          id: "pro",
-          name: "Pro Lifetime",
-          price: "$29",
-          oldPrice: "$59",
+          id: "combo",
+          name: "2 Devices Combo",
+          price: "$10",
+          oldPrice: "$25",
           period: "One-time lifetime payment",
-          desc: "The ultimate choice for streamers, remote workers, gamers, and podcasters.",
-          buttonText: "Get Pro License",
+          desc: "Save big by covering your desktop workstation and personal laptop.",
+          buttonText: "Buy Combo via WhatsApp ($10)",
+          whatsappMsg: "Hello, I want to purchase the Voice Clear AI Combo (2 Devices - $10 USD).",
           features: [
+            "Lifetime license for 2 PCs (Windows 10 / 11)",
             "Extreme DeepFilterNet3 suppression (-51.5 dB)",
+            "1 Year Priority Technical Support",
+            "5-Day Money-Back Guarantee",
             "Ultra-low latency (<10ms) AVX2 profile",
-            "All future v1.x & v2.x updates included",
-            "Lifetime license for up to 2 personal PCs",
-            "Eliminates mechanical keyboards, fans, and traffic",
-            "Priority email support"
+            "Compatible with Boostlingo, Discord, Zoom, Teams, OBS",
+            "Lifetime updates included"
           ],
           featured: true
-        },
-        {
-          id: "studio",
-          name: "Studio & Commercial",
-          price: "$69",
-          oldPrice: "$120",
-          period: "One-time commercial license",
-          desc: "For production studios, content agencies, and creators with multiple workstations.",
-          buttonText: "Get Studio License",
-          features: [
-            "Everything included in Pro",
-            "Commercial monetization license",
-            "Install on up to 5 devices",
-            "Professional vocal EQ curves and presets",
-            "VIP Discord support & direct technical assistance",
-            "Early access to next-gen AI models"
-          ],
-          featured: false
         }
       ],
-      moneyBack: "30-day no-questions-asked money-back guarantee."
-    },
-    testimonials: {
-      tag: "TESTIMONIALS",
-      title: "Loved by Creators, Streamers & Remote Pros",
-      items: [
-        {
-          name: "Carlos Mendoza",
-          role: "Twitch Streamer & Content Creator",
-          avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-          comment: "I use loud blue mechanical switches and have a high-speed room fan. Voice Clear AI cancels it all out without touching my GPU or dropping a single frame in games."
-        },
-        {
-          name: "Elena Rostova",
-          role: "Senior Engineering Manager (Remote)",
-          avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80",
-          comment: "I'm in executive meetings all day. My two dogs bark frequently, and with Voice Clear AI, no one on Teams or Zoom hears anything except my voice. Essential tool."
-        },
-        {
-          name: "Marcos Del Valle",
-          role: "Host of 'Tech Pulse' Podcast",
-          avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
-          comment: "The 48kHz studio fidelity is incredible. Other noise reducers make you sound underwater or robotic. Voice Clear AI preserves the warm low end and crisp high end of my mic."
-        }
-      ]
+      moneyBack: "5-day money-back guarantee and 1-year technical support included."
     },
     faq: {
       tag: "FREQUENTLY ASKED QUESTIONS",
       title: "Got Questions? We Have Answers.",
       items: [
         {
+          q: "How does purchasing via WhatsApp work?",
+          a: "Clicking the buy button connects you directly to us on WhatsApp (+505 8741 4791). We provide available payment methods and immediately send your activation license key and full installer."
+        },
+        {
+          q: "What does the 5-day money-back guarantee cover?",
+          a: "If during the first 5 days the software does not meet your expectations or isn't compatible with your setup, we issue a 100% full refund with no hassle."
+        },
+        {
+          q: "What does the 1-year technical support include?",
+          a: "You get direct personal assistance via WhatsApp and email to help you with installation, virtual mic configuration, and audio fine-tuning for a full year."
+        },
+        {
           q: "Does it require an active internet connection?",
           a: "No. Voice Clear AI processes 100% of your audio locally on your CPU using ONNX Runtime with AVX2 acceleration. It runs completely offline with zero telemetry or audio uploads."
         },
         {
-          q: "Do I need a dedicated GPU like NVIDIA RTX?",
-          a: "No. Unlike other tools that consume 15-25% of your GPU, Voice Clear AI is engineered purely for CPUs (Intel 8th Gen+ or AMD Ryzen). Your graphics card remains 100% available for gaming and rendering."
-        },
-        {
-          q: "Is it compatible with Discord, Zoom, OBS, and Google Meet?",
+          q: "Is it compatible with Boostlingo, Zoom, Discord, and Teams?",
           a: "Yes. Voice Clear AI provides a Windows virtual audio device ('Voice Clear Virtual Mic') via its AVStream driver. You can select it in any software that accepts microphone input."
         },
         {
-          q: "How much latency does it introduce?",
-          a: "Our p50 benchmarks measure only 9.84 milliseconds of processing duration for 480-sample blocks at 48kHz, which is imperceptible to human ears and keeps perfect sync with your webcam."
-        },
-        {
-          q: "How do I receive my license key after purchase?",
-          a: "Immediately upon checkout, you will receive an email containing your lifetime license key and the direct download link for the Pro installer."
-        },
-        {
-          q: "Which operating systems are supported?",
-          a: "Voice Clear AI natively supports Windows 10 (64-bit) and Windows 11 (64-bit)."
+          q: "Do I need a dedicated GPU like NVIDIA RTX?",
+          a: "No. Unlike other tools that consume your GPU, Voice Clear AI is engineered purely for CPUs (Intel 8th Gen+ or AMD Ryzen). Your graphics card remains 100% free."
         }
       ]
     },
     ctaBanner: {
       title: "Ready to Speak with Crystal-Clear Confidence?",
-      subtitle: "Join thousands of streamers, developers, and creators who eliminated background noise forever.",
-      buttonDownload: "Download Free for Windows",
-      buttonPro: "Get Pro License ($29 USD)"
+      subtitle: "Get your lifetime license for only $6.99 USD or the 2-device combo for $10 USD with full technical support included.",
+      buttonDownload: "Download Free Trial",
+      buttonPro: "Buy via WhatsApp ($6.99 USD)"
     },
     footer: {
       tagline: "Real-time AI acoustic noise suppression for Windows.",
@@ -670,16 +589,16 @@ export const translations = {
       demo: "A/B Demo",
       pricing: "Pricing",
       downloads: "Downloads",
-      resources: "Resources",
-      docs: "Documentation",
-      github: "GitHub Repository",
-      benchmarks: "Benchmark Report",
-      releaseNotes: "Release Notes",
-      legal: "Legal",
-      privacy: "Privacy Policy",
-      terms: "Terms of Service",
+      contactTitle: "Contact & Support",
+      emailLabel: "Email:",
+      emailValue: "bpalacios347@gmail.com",
+      whatsappLabel: "WhatsApp:",
+      whatsappValue: "+505 8741 4791",
+      legal: "Warranty & Support",
+      warranty: "5-day money-back guarantee",
+      support: "1 Year Technical Support",
       license: "Software License",
-      copyright: "© 2026 Voice Clear AI. All rights reserved. Powered by DeepFilterNet3 & WDK."
+      copyright: "© 2026 Voice Clear AI. All rights reserved. Contact: bpalacios347@gmail.com"
     },
     modals: {
       download: {
@@ -691,17 +610,6 @@ export const translations = {
         step1: "1. Run the installer 'VoiceClearAI_Setup.exe'.",
         step2: "2. Accept the secure virtual audio driver setup.",
         step3: "3. Launch Voice Clear AI, select your physical mic, and enjoy clean audio."
-      },
-      checkout: {
-        title: "Get License",
-        subtitle: "Secure one-time lifetime payment with 30-day money back guarantee",
-        planLabel: "Selected Plan",
-        emailPlaceholder: "your-email@example.com",
-        cardPlaceholder: "Card number",
-        expiryPlaceholder: "MM/YY",
-        cvcPlaceholder: "CVC",
-        payButton: "Complete Purchase & Get Key",
-        secureNote: "🔒 256-bit SSL Encryption. We accept Credit Cards, Debit, and PayPal."
       }
     }
   }

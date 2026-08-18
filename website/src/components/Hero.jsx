@@ -1,7 +1,12 @@
 import React from 'react';
-import { Download, ShoppingBag, ShieldCheck, Zap, Cpu, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Download, ShieldCheck, Zap, Cpu, Sparkles, CheckCircle2, MessageCircle } from 'lucide-react';
 
-export default function Hero({ t, onOpenDownload, onOpenCheckout }) {
+export default function Hero({ t, onOpenDownload }) {
+  const openWhatsApp = () => {
+    const text = "Hola, quiero adquirir la licencia de Voice Clear AI ($6.99 USD).";
+    window.open(`https://wa.me/50587414791?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
   return (
     <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-radial-glow">
       {/* Background Decorative Grid & Glow Elements */}
@@ -49,13 +54,13 @@ export default function Hero({ t, onOpenDownload, onOpenCheckout }) {
             </button>
 
             <button
-              onClick={() => onOpenCheckout('pro')}
+              onClick={openWhatsApp}
               className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-brand-card hover:bg-brand-cardHover border border-brand-borderLight text-white font-bold text-base shadow-lg transition-all transform hover:-translate-y-1"
             >
-              <ShoppingBag className="w-5 h-5 text-brand-cyan" />
+              <MessageCircle className="w-5 h-5 text-[#25D366] fill-current" />
               <span>{t.hero.ctaPricing}</span>
-              <span className="px-2 py-0.5 rounded-full bg-brand-purple/40 text-brand-mint text-xs font-mono font-semibold border border-brand-purple/60">
-                $29 USD
+              <span className="px-2.5 py-0.5 rounded-full bg-[#25D366]/20 text-[#25D366] text-xs font-mono font-bold border border-[#25D366]/40">
+                $6.99 USD
               </span>
             </button>
           </div>
@@ -64,7 +69,11 @@ export default function Hero({ t, onOpenDownload, onOpenCheckout }) {
           <div className="flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs text-slate-400 font-medium mb-16">
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-brand-mint" />
-              <span>Windows 10 / 11 (64-bit)</span>
+              <span>Garantía de 5 Días</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-brand-cyan" />
+              <span>1 Año de Soporte Técnico</span>
             </div>
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-brand-cyan" />
@@ -76,7 +85,7 @@ export default function Hero({ t, onOpenDownload, onOpenCheckout }) {
             </div>
             <div className="flex items-center gap-1.5">
               <Cpu className="w-4 h-4 text-purple-400" />
-              <span>0% Consumo de GPU</span>
+              <span>0% GPU Requerida</span>
             </div>
           </div>
 
