@@ -6,8 +6,8 @@ out/
 x64/
 x86/
 Debug/
-Release/
 *.exe
+!website/public/*.exe
 *.obj
 *.pdb
 *.ilk

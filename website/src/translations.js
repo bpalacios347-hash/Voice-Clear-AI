@@ -7,6 +7,7 @@ export const translations = {
       benchmarks: "Rendimiento",
       pricing: "Precios",
       faq: "Preguntas",
+      downloadExe: "Descargar .EXE",
       buyPro: "Comprar por WhatsApp ($6.99)",
       contact: "Contacto"
     },
@@ -16,8 +17,10 @@ export const translations = {
       titleHighlight: "Cero Ruido.",
       titleEnd: "100% Privado en tu PC.",
       subtitle: "Elimina teclados mecánicos, ventiladores, ecos y ruidos de fondo en tiempo real con IA. Menos de 10ms de latencia, 0% de uso de GPU y sin enviar un solo byte de audio a la nube.",
-      ctaSingle: "Comprar 1 Dispositivo ($6.99 USD)",
-      ctaCombo: "Comprar Combo 2 PCs ($10 USD)",
+      ctaDownload: "Descargar para Windows",
+      ctaDownloadSub: "Instalador .EXE • Windows 10 / 11 (64-bit)",
+      ctaSingle: "Comprar 1 PC ($6.99 USD)",
+      ctaCombo: "Combo 2 PCs ($10 USD)",
       stats: [
         { label: "Reducción de Ruido", value: "-51.5 dB" },
         { label: "Latencia en Tiempo Real", value: "9.8 ms" },
@@ -172,13 +175,13 @@ export const translations = {
       steps: [
         {
           step: "01",
-          title: "Instalación Rápida",
-          desc: "Al adquirir tu licencia recibes el instalador completo. Instalará automáticamente el driver virtual de audio seguro y la aplicación en Windows."
+          title: "Descarga e Instala",
+          desc: "Haz clic en Descargar .EXE y ejecuta el instalador en Windows. Instalará automáticamente el driver virtual de audio y la aplicación."
         },
         {
           step: "02",
           title: "Selecciona tu Micrófono Físico",
-          desc: "Abre Voice Clear AI e ingresa tu clave de activación. Elige tu micrófono USB, headset o interfaz de audio en el menú desplegable."
+          desc: "Abre Voice Clear AI y elige tu micrófono USB, headset o interfaz de audio en el menú desplegable."
         },
         {
           step: "03",
@@ -242,8 +245,12 @@ export const translations = {
       title: "Resolvemos todas tus dudas",
       items: [
         {
-          q: "¿Cómo es el proceso de compra por WhatsApp?",
-          a: "Al hacer clic en el botón de compra, te pondrás en contacto directo con nosotros por WhatsApp (+505 8741 4791). Te facilitamos los métodos de pago disponibles y te entregamos inmediatamente tu clave de activación junto al instalador completo."
+          q: "¿Cómo descargo e instalo el archivo .exe?",
+          a: "Puedes hacer clic en el botón 'Descargar .EXE' en la parte superior o en el Hero para obtener el instalador oficial 'VoiceClearAI_Setup.exe' (~75 MB). Es compatible con Windows 10 y Windows 11 de 64 bits."
+        },
+        {
+          q: "¿Cómo es el proceso de compra de la clave por WhatsApp?",
+          a: "Al hacer clic en el botón de compra, te pondrás en contacto directo con nosotros por WhatsApp (+505 8741 4791). Te facilitamos los métodos de pago disponibles y te entregamos inmediatamente tu clave de activación de por vida."
         },
         {
           q: "¿Qué incluye la garantía de 5 días?",
@@ -260,18 +267,15 @@ export const translations = {
         {
           q: "¿Es compatible con Boostlingo, Zoom, Discord y Teams?",
           a: "Sí. Voice Clear AI crea un dispositivo de audio virtual llamado 'Voice Clear Virtual Mic' en Windows a través del driver AVStream. Puedes seleccionarlo en cualquier programa que admita un micrófono."
-        },
-        {
-          q: "¿Necesito una tarjeta gráfica dedicada potente como NVIDIA RTX?",
-          a: "No. A diferencia de soluciones que consumen tu tarjeta de video, Voice Clear AI está hiper-optimizado para la CPU (Intel 8va generación en adelante o AMD Ryzen equivalente). Tu GPU queda libre."
         }
       ]
     },
     ctaBanner: {
       title: "¿Listo para hablar con la máxima claridad?",
-      subtitle: "Consigue tu licencia definitiva por solo $6.99 USD o el combo de 2 dispositivos por $10 USD con soporte técnico incluido.",
-      buttonSingle: "Comprar 1 Dispositivo ($6.99 USD)",
-      buttonCombo: "Comprar Combo 2 PCs ($10 USD)"
+      subtitle: "Descarga el instalador .exe de inmediato o adquiere tu clave definitiva por WhatsApp con soporte incluido.",
+      buttonDownload: "Descargar .EXE (Windows)",
+      buttonSingle: "Comprar 1 PC ($6.99 USD)",
+      buttonCombo: "Combo 2 PCs ($10 USD)"
     },
     footer: {
       tagline: "Cancelación de ruido en tiempo real impulsada por Inteligencia Artificial acústica para Windows.",
@@ -299,6 +303,7 @@ export const translations = {
       benchmarks: "Benchmarks",
       pricing: "Pricing",
       faq: "FAQ",
+      downloadExe: "Download .EXE",
       buyPro: "Buy via WhatsApp ($6.99)",
       contact: "Contact"
     },
@@ -308,8 +313,10 @@ export const translations = {
       titleHighlight: "Zero Noise.",
       titleEnd: "100% Private On-Device.",
       subtitle: "Eliminate mechanical keyboard clatter, fan whirrs, room echoes, and background noise in real-time with AI. Sub-10ms latency, 0% GPU usage, and zero audio data sent to the cloud.",
-      ctaSingle: "Buy 1 Device ($6.99 USD)",
-      ctaCombo: "Buy 2 PCs Combo ($10 USD)",
+      ctaDownload: "Download for Windows",
+      ctaDownloadSub: ".EXE Installer • Windows 10 / 11 (64-bit)",
+      ctaSingle: "Buy 1 PC ($6.99 USD)",
+      ctaCombo: "2 PCs Combo ($10 USD)",
       stats: [
         { label: "Noise Reduction", value: "-51.5 dB" },
         { label: "Real-Time Latency", value: "9.8 ms" },
@@ -464,13 +471,13 @@ export const translations = {
       steps: [
         {
           step: "01",
-          title: "Quick Setup",
-          desc: "Upon purchasing your license, you receive the full installer. It automatically sets up the secure virtual audio driver and app in Windows."
+          title: "Download & Install",
+          desc: "Click 'Download .EXE' and run the Windows installer. It installs the certified virtual audio driver and app automatically."
         },
         {
           step: "02",
           title: "Select Physical Microphone",
-          desc: "Launch Voice Clear AI and enter your activation key. Choose your USB microphone, headset, or audio interface from the dropdown."
+          desc: "Launch Voice Clear AI and choose your USB microphone, headset, or audio interface from the dropdown list."
         },
         {
           step: "03",
@@ -534,8 +541,12 @@ export const translations = {
       title: "Got Questions? We Have Answers.",
       items: [
         {
-          q: "How does purchasing via WhatsApp work?",
-          a: "Clicking the buy button connects you directly to us on WhatsApp (+505 8741 4791). We provide available payment methods and immediately send your activation license key and full installer."
+          q: "How do I download and install the .exe file?",
+          a: "Click on the 'Download .EXE' button at the top or in the Hero to download the official 'VoiceClearAI_Setup.exe' (~75 MB). It runs natively on Windows 10 and 11 (64-bit)."
+        },
+        {
+          q: "How does purchasing the license key via WhatsApp work?",
+          a: "Clicking the buy button connects you directly to us on WhatsApp (+505 8741 4791). We provide available payment methods and immediately send your activation license key."
         },
         {
           q: "What does the 5-day money-back guarantee cover?",
@@ -552,18 +563,15 @@ export const translations = {
         {
           q: "Is it compatible with Boostlingo, Zoom, Discord, and Teams?",
           a: "Yes. Voice Clear AI provides a Windows virtual audio device ('Voice Clear Virtual Mic') via its AVStream driver. You can select it in any software that accepts microphone input."
-        },
-        {
-          q: "Do I need a dedicated GPU like NVIDIA RTX?",
-          a: "No. Unlike other tools that consume your GPU, Voice Clear AI is engineered purely for CPUs (Intel 8th Gen+ or AMD Ryzen). Your graphics card remains 100% free."
         }
       ]
     },
     ctaBanner: {
       title: "Ready to Speak with Crystal-Clear Confidence?",
-      subtitle: "Get your lifetime license for only $6.99 USD or the 2-device combo for $10 USD with full technical support included.",
-      buttonSingle: "Buy 1 Device ($6.99 USD)",
-      buttonCombo: "Buy 2 Devices Combo ($10 USD)"
+      subtitle: "Download the .exe installer right away or get your permanent license key via WhatsApp with full support included.",
+      buttonDownload: "Download .EXE (Windows)",
+      buttonSingle: "Buy 1 PC ($6.99 USD)",
+      buttonCombo: "2 PCs Combo ($10 USD)"
     },
     footer: {
       tagline: "Real-time AI acoustic noise suppression for Windows.",

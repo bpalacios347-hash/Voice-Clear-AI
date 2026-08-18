@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Zap, Cpu, Sparkles, CheckCircle2, MessageCircle } from 'lucide-react';
+import { Download, ShieldCheck, Zap, Cpu, Sparkles, CheckCircle2, MessageCircle } from 'lucide-react';
 
 export default function Hero({ t }) {
   const openWhatsAppSingle = () => {
@@ -43,21 +43,39 @@ export default function Hero({ t }) {
             {t.hero.subtitle}
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-8">
+          {/* CTA Action Buttons Group */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto mb-8">
+            
+            {/* Direct .EXE Download Button */}
+            <a
+              href="./VoiceClearAI_Setup.exe"
+              download="VoiceClearAI_Setup.exe"
+              className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-cyan via-brand-accent to-brand-mint text-slate-950 font-extrabold text-base shadow-xl shadow-brand-cyan/25 hover:shadow-brand-cyan/40 transform hover:-translate-y-1 transition-all duration-200 group"
+            >
+              <Download className="w-5 h-5 group-hover:animate-bounce" />
+              <div className="flex flex-col text-left">
+                <span>{t.hero.ctaDownload}</span>
+                <span className="text-[10px] font-mono font-medium text-slate-900 tracking-tight opacity-90">
+                  {t.hero.ctaDownloadSub} (~75 MB)
+                </span>
+              </div>
+            </a>
+
+            {/* Buy 1 PC WhatsApp Button */}
             <button
               onClick={openWhatsAppSingle}
-              className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-extrabold text-base shadow-xl shadow-[#25D366]/25 hover:opacity-95 transform hover:-translate-y-1 transition-all duration-200"
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-extrabold text-sm sm:text-base shadow-lg shadow-[#25D366]/20 hover:opacity-95 transform hover:-translate-y-1 transition-all"
             >
               <MessageCircle className="w-5 h-5 fill-current" />
               <span>{t.hero.ctaSingle}</span>
             </button>
 
+            {/* Combo 2 PCs WhatsApp Button */}
             <button
               onClick={openWhatsAppCombo}
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-brand-card hover:bg-brand-cardHover border border-brand-cyan/40 text-white font-bold text-base shadow-lg transition-all transform hover:-translate-y-1"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-brand-card hover:bg-brand-cardHover border border-brand-cyan/40 text-white font-bold text-sm sm:text-base shadow-lg transition-all transform hover:-translate-y-1"
             >
-              <Sparkles className="w-5 h-5 text-brand-mint" />
+              <Sparkles className="w-4 h-4 text-brand-mint" />
               <span>{t.hero.ctaCombo}</span>
             </button>
           </div>
