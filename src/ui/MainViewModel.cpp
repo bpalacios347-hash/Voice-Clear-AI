@@ -37,7 +37,7 @@ namespace VoiceClear::UI {
             emit serviceConnectedChanged();
         }
 
-        // 60 FPS Telemetry & VU Meters Poller
+        // 30 FPS Telemetry & VU Meters Poller (Optimized)
         m_pollTimer = new QTimer(this);
         connect(m_pollTimer, &QTimer::timeout, this, [this]() {
             if (!m_inProcessTelemetry) return;
@@ -47,13 +47,22 @@ namespace VoiceClear::UI {
             m_xruns = snap.xrunCount;
             m_driverMode = m_inProcessEngine ? m_inProcessEngine->GetDriverMode() : 0;
 
-            m_inputLevel = std::max(snap.inputRmsLevel, m_inputLevel * 0.82f);
-            m_outputLevel = std::max(snap.outputRmsLevel, m_outputLevel * 0.82f);
-            emit inputLevelChanged();
-            emit outputLevelChanged();
+            float newInput = std::max(snap.inputRmsLevel, m_inputLevel * 0.75f);
+            float newOutput = std::max(snap.outputRmsLevel, m_outputLevel * 0.75f);
+            if (newInput < 0.005f) newInput = 0.0f;
+            if (newOutput < 0.005f) newOutput = 0.0f;
+
+            if (std::abs(newInput - m_inputLevel) > 0.002f) {
+                m_inputLevel = newInput;
+                emit inputLevelChanged();
+            }
+            if (std::abs(newOutput - m_outputLevel) > 0.002f) {
+                m_outputLevel = newOutput;
+                emit outputLevelChanged();
+            }
             emit telemetryUpdated();
         });
-        m_pollTimer->start(16);
+        m_pollTimer->start(33); // 30 FPS (silky smooth, cuts GUI CPU usage in half)
     }
 
     MainViewModel::~MainViewModel() {

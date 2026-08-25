@@ -94,7 +94,7 @@ namespace VoiceClear::Audio {
                 }
             } else {
                 // Input buffer empty, wait for CaptureEngine to produce
-                std::this_thread::sleep_for(std::chrono::microseconds(500));
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
             }
         }
     }

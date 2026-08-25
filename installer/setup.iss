@@ -516,7 +516,7 @@ end;
 
 // =============================================================================
 [Tasks]
-Name: "desktopicon";    Description: "{cm:CreateDesktopIcon}";                               GroupDescription: "{cm:AdditionalIcons}"
+Name: "desktopicon";    Description: "{cm:CreateDesktopIcon}";                               GroupDescription: "{cm:AdditionalIcons}"; Flags: checkedonce
 Name: "startuprun";     Description: "Launch Voice Clear AI at Windows login";               GroupDescription: "Startup"; Flags: unchecked
 Name: "installservice";  Description: "Install Voice Clear AI Windows Service";                GroupDescription: "System Services"
 Name: "installvbcable";  Description: "Install Virtual Audio Cable Driver (Microsoft WHQL Signed)"; GroupDescription: "Audio Drivers"; Flags: checkedonce
@@ -563,9 +563,10 @@ Root: HKLM; Subkey: "SOFTWARE\VoiceClearAI"; \
 
 ; =============================================================================
 [Icons]
-Name: "{group}\Voice Clear AI";          Filename: "{app}\VoiceClear.exe"; IconFilename: "{app}\app.ico"
+Name: "{group}\Voice Clear AI";          Filename: "{app}\VoiceClear.exe"; WorkingDir: "{app}"; IconFilename: "{app}\app.ico"
 Name: "{group}\Uninstall Voice Clear AI"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\Voice Clear AI";    Filename: "{app}\VoiceClear.exe"; IconFilename: "{app}\app.ico"; Tasks: desktopicon
+Name: "{autodesktop}\Voice Clear AI";    Filename: "{app}\VoiceClear.exe"; WorkingDir: "{app}"; IconFilename: "{app}\app.ico"; Tasks: desktopicon
+Name: "{userdesktop}\Voice Clear AI";    Filename: "{app}\VoiceClear.exe"; WorkingDir: "{app}"; IconFilename: "{app}\app.ico"; Tasks: desktopicon
 
 ; =============================================================================
 [Run]
