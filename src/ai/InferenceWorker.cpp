@@ -155,11 +155,11 @@ namespace VoiceClear::AI {
             }
 
             if (!processedAny) {
-                // Event-driven instant wakeup (<10 microseconds) when audio arrives, or 2ms timeout
+                // Event-driven instant wakeup (<10 microseconds) when audio arrives, or 20ms fallback
                 if (m_wakeEvent) {
-                    WaitForSingleObject(m_wakeEvent, 2);
+                    WaitForSingleObject(m_wakeEvent, 20);
                 } else {
-                    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+                    std::this_thread::sleep_for(std::chrono::milliseconds(5));
                 }
             }
         }

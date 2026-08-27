@@ -259,7 +259,7 @@ static void WriteAudioToWasapiBuffer(
         monSamples.reserve(4096);
 
         while (m_running.load(std::memory_order_relaxed)) {
-            DWORD waitRes = WaitForSingleObject(hRenderEvent, 5);
+            DWORD waitRes = WaitForSingleObject(hRenderEvent, 20);
 
             UINT32 framesNeeded = 0;
             if (pAudioClient && pRenderClient && pWfx) {
