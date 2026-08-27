@@ -62,13 +62,13 @@ namespace VoiceClear::UI {
             }
             emit telemetryUpdated();
         });
-        m_pollTimer->start(33); // 30 FPS active GUI rendering
+        m_pollTimer->start(40); // 25 FPS active GUI rendering (ideal for audio meters)
     }
 
     void MainViewModel::setWindowVisible(bool visible) {
         if (!m_pollTimer) return;
         if (visible) {
-            m_pollTimer->setInterval(33); // 30 FPS active GUI rendering
+            m_pollTimer->setInterval(40); // 25 FPS active GUI rendering
         } else {
             m_pollTimer->setInterval(500); // 2 Hz background tray polling (0.0% CPU)
         }

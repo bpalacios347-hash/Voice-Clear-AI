@@ -41,6 +41,11 @@ namespace VoiceClear {
         // 1 second @ 48 kHz stereo — generous headroom for jitter
         m_captureToPipelineBuffer = std::make_shared<Audio::LockFreeRingBuffer<float>>(48000 * 2);
         m_pipelineToOutputBuffer  = std::make_shared<Audio::LockFreeRingBuffer<float>>(48000 * 2);
+
+        // Pre-allocate zero-allocation scratch buffers
+        m_captureMonoScratch.resize(4096, 0.0f);
+        m_resampleScratch.resize(4096, 0.0f);
+        m_outputMonoScratch.resize(4096, 0.0f);
     }
 
     EngineBootstrap::~EngineBootstrap() { Stop(); }
@@ -97,44 +102,49 @@ namespace VoiceClear {
             [this](const float* data, size_t frames, int channels, int sampleRate) {
                 if (!data || frames == 0) return;
 
-                // 1. Extract channel 0 as mono for the AI pipeline
-                //    Most USB microphones/headsets report stereo but only have signal on ch0.
-                //    Averaging with a silent ch1 would lose -6 dB. Always use ch0.
-                std::vector<float> monoBuf(frames);
+                // 1. Extract channel 0 as mono for the AI pipeline (Zero-allocation)
+                if (m_captureMonoScratch.size() < frames) {
+                    m_captureMonoScratch.resize(frames * 2, 0.0f);
+                }
+
                 if (channels == 1) {
-                    std::copy(data, data + frames, monoBuf.begin());
+                    std::copy(data, data + frames, m_captureMonoScratch.begin());
                 } else {
-                    // Extract channel 0 directly (no averaging, no volume loss)
                     for (size_t i = 0; i < frames; ++i) {
-                        monoBuf[i] = data[i * channels];
+                        m_captureMonoScratch[i] = data[i * channels];
                     }
                 }
+
+                const float* activeData = m_captureMonoScratch.data();
+                size_t activeFrames = frames;
 
                 // 2. High-quality linear resampler if microphone sample rate differs from 48000 Hz
                 if (sampleRate > 0 && sampleRate != 48000) {
                     double ratio = 48000.0 / static_cast<double>(sampleRate);
                     size_t outFrames = static_cast<size_t>(std::round(frames * ratio));
                     if (outFrames > 0) {
-                        std::vector<float> resampled(outFrames);
+                        if (m_resampleScratch.size() < outFrames) {
+                            m_resampleScratch.resize(outFrames * 2, 0.0f);
+                        }
                         for (size_t i = 0; i < outFrames; ++i) {
                             double srcPos = i / ratio;
                             size_t idx0 = static_cast<size_t>(srcPos);
                             size_t idx1 = std::min(idx0 + 1, frames - 1);
                             float frac = static_cast<float>(srcPos - idx0);
-                            resampled[i] = (1.0f - frac) * monoBuf[idx0] + frac * monoBuf[idx1];
+                            m_resampleScratch[i] = (1.0f - frac) * m_captureMonoScratch[idx0] + frac * m_captureMonoScratch[idx1];
                         }
-                        monoBuf = std::move(resampled);
-                        frames = monoBuf.size();
+                        activeData = m_resampleScratch.data();
+                        activeFrames = outFrames;
                     }
                 }
 
                 if (m_aiEnabled.load(std::memory_order_relaxed)) {
-                    m_captureToPipelineBuffer->Push(monoBuf.data(), frames);
+                    m_captureToPipelineBuffer->Push(activeData, activeFrames);
                     if (m_inferenceWorker) {
                         m_inferenceWorker->NotifyAudioAvailable();
                     }
                 } else {
-                    m_pipelineToOutputBuffer->Push(monoBuf.data(), frames);
+                    m_pipelineToOutputBuffer->Push(activeData, activeFrames);
                 }
             });
 
@@ -160,14 +170,20 @@ namespace VoiceClear {
                 // 2. Prevent Buffer Overflow / Latency Drift (Cap max delay at ~80ms = 3840 samples)
                 if (avail > 3840) {
                     size_t toDrop = avail - 1920;
-                    std::vector<float> dropBuf(toDrop);
-                    m_pipelineToOutputBuffer->Pop(dropBuf.data(), toDrop);
+                    if (m_outputMonoScratch.size() < toDrop) {
+                        m_outputMonoScratch.resize(toDrop * 2, 0.0f);
+                    }
+                    m_pipelineToOutputBuffer->Pop(m_outputMonoScratch.data(), toDrop);
                     avail = m_pipelineToOutputBuffer->ReadAvailable();
                 }
 
-                // 3. Pop available audio with smooth Packet Loss Concealment (PLC)
-                std::vector<float> monoBuf(requestedFrames, 0.0f);
-                size_t got = m_pipelineToOutputBuffer->Pop(monoBuf.data(), requestedFrames);
+                // 3. Pop available audio with smooth Packet Loss Concealment (PLC) — Zero-allocation
+                if (m_outputMonoScratch.size() < requestedFrames) {
+                    m_outputMonoScratch.resize(requestedFrames * 2, 0.0f);
+                }
+                std::fill(m_outputMonoScratch.begin(), m_outputMonoScratch.begin() + requestedFrames, 0.0f);
+
+                size_t got = m_pipelineToOutputBuffer->Pop(m_outputMonoScratch.data(), requestedFrames);
 
                 static float s_lastSample = 0.0f;
 
@@ -175,28 +191,28 @@ namespace VoiceClear {
                     if (got > 0) {
                         // Smoothly decay the tail to avoid abrupt clicks
                         for (size_t i = got; i < requestedFrames; ++i) {
-                            monoBuf[i] = monoBuf[got - 1] * std::pow(0.92f, static_cast<float>(i - got + 1));
+                            m_outputMonoScratch[i] = m_outputMonoScratch[got - 1] * std::pow(0.92f, static_cast<float>(i - got + 1));
                         }
                     } else {
                         // PLC: Soft exponential continuation from last sample rather than harsh zero-gap
                         for (size_t i = 0; i < requestedFrames; ++i) {
-                            monoBuf[i] = s_lastSample * std::pow(0.85f, static_cast<float>(i + 1));
+                            m_outputMonoScratch[i] = s_lastSample * std::pow(0.85f, static_cast<float>(i + 1));
                         }
                     }
                 }
-                s_lastSample = monoBuf[requestedFrames - 1];
+                s_lastSample = m_outputMonoScratch[requestedFrames - 1];
 
                 if (channels == 1) {
-                    std::copy(monoBuf.begin(), monoBuf.end(), outData);
+                    std::copy(m_outputMonoScratch.begin(), m_outputMonoScratch.begin() + requestedFrames, outData);
                 } else if (channels == 2) {
                     for (size_t i = 0; i < requestedFrames; ++i) {
-                        outData[2 * i]     = monoBuf[i];
-                        outData[2 * i + 1] = monoBuf[i];
+                        outData[2 * i]     = m_outputMonoScratch[i];
+                        outData[2 * i + 1] = m_outputMonoScratch[i];
                     }
                 } else {
                     for (size_t i = 0; i < requestedFrames; ++i) {
                         for (int c = 0; c < channels; ++c) {
-                            outData[i * channels + c] = (c < 2) ? monoBuf[i] : 0.0f;
+                            outData[i * channels + c] = (c < 2) ? m_outputMonoScratch[i] : 0.0f;
                         }
                     }
                 }

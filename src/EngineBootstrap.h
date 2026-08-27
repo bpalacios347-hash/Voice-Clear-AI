@@ -114,6 +114,11 @@ namespace VoiceClear {
         std::string        m_selectedOutputName{"CABLE Input (VB-Audio Virtual Cable)"};
         mutable std::mutex m_modelReloadMutex;
         mutable std::mutex m_deviceMutex;
+
+        // Zero-allocation scratch buffers for audio callbacks
+        std::vector<float> m_captureMonoScratch;
+        std::vector<float> m_resampleScratch;
+        std::vector<float> m_outputMonoScratch;
     };
 
 } // namespace VoiceClear
