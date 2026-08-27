@@ -88,6 +88,7 @@ namespace VoiceClear::UI {
         Q_INVOKABLE void toggleDiagnostics();
         Q_INVOKABLE void toggleMonitor();
         Q_INVOKABLE void setProfile(const QString& profileId);
+        Q_INVOKABLE void setWindowVisible(bool visible);
         Q_INVOKABLE void reloadModel(const QString& modelName);
         Q_INVOKABLE void requestStatus();
         Q_INVOKABLE void refreshDevices();

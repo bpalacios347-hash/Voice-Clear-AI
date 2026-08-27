@@ -17,9 +17,17 @@ STFT::STFT(int frameSize, int fftSize)
         throw std::invalid_argument("FFT size must be even and >= frameSize");
     }
 
+    int numBins = m_fftSize / 2 + 1;
+
     m_window.resize(fftSize, 0.0f);
     m_overlapBufferIn.resize(fftSize - frameSize, 0.0f);
     m_overlapBufferOut.resize(fftSize - frameSize, 0.0f);
+
+    // Pre-allocate zero-allocation scratch buffers
+    m_fftInput.resize(fftSize, 0.0f);
+    m_spectrum.resize(numBins, {0.0f, 0.0f});
+    m_timeOut.resize(fftSize, 0.0f);
+    m_outputFrame.resize(frameSize, 0.0f);
 
     ComputeHannWindow();
 
@@ -41,64 +49,46 @@ void STFT::ComputeHannWindow() {
     }
 }
 
-std::vector<std::complex<float>> STFT::Forward(std::span<const float> inputFrame) {
-    std::vector<float> fftInput(m_fftSize, 0.0f);
+const std::vector<std::complex<float>>& STFT::Forward(std::span<const float> inputFrame) {
     int overlapSize = m_fftSize - m_frameSize;
 
     // Shift in new data: [old_data..., new_data...]
-    std::copy(m_overlapBufferIn.begin(), m_overlapBufferIn.end(), fftInput.begin());
-    std::copy(inputFrame.begin(), inputFrame.end(), fftInput.begin() + overlapSize);
+    std::copy(m_overlapBufferIn.begin(), m_overlapBufferIn.end(), m_fftInput.begin());
+    std::copy(inputFrame.begin(), inputFrame.end(), m_fftInput.begin() + overlapSize);
 
     // Save for next hop
-    std::copy(fftInput.begin() + m_frameSize, fftInput.end(), m_overlapBufferIn.begin());
+    std::copy(m_fftInput.begin() + m_frameSize, m_fftInput.end(), m_overlapBufferIn.begin());
 
     // Apply Analysis Window
     for (int i = 0; i < m_fftSize; ++i) {
-        fftInput[i] *= m_window[i];
+        m_fftInput[i] *= m_window[i];
     }
 
-    int numBins = m_fftSize / 2 + 1;
-    std::vector<kiss_fft_cpx> fftOutput(numBins);
+    kiss_fftr((kiss_fftr_cfg)m_kissFftCfg, m_fftInput.data(), reinterpret_cast<kiss_fft_cpx*>(m_spectrum.data()));
 
-    kiss_fftr((kiss_fftr_cfg)m_kissFftCfg, fftInput.data(), fftOutput.data());
-
-    std::vector<std::complex<float>> spectrum(numBins);
-    for (int i = 0; i < numBins; ++i) {
-        spectrum[i] = std::complex<float>(fftOutput[i].r, fftOutput[i].i);
-    }
-
-    return spectrum;
+    return m_spectrum;
 }
 
-std::vector<float> STFT::Inverse(std::span<const std::complex<float>> spectrum) {
-    int numBins = m_fftSize / 2 + 1;
-    std::vector<kiss_fft_cpx> ifftInput(numBins);
+const std::vector<float>& STFT::Inverse(std::span<const std::complex<float>> spectrum) {
+    kiss_fftri((kiss_fftr_cfg)m_kissIfftCfg, 
+               reinterpret_cast<const kiss_fft_cpx*>(spectrum.data()), 
+               m_timeOut.data());
 
-    for (int i = 0; i < numBins; ++i) {
-        ifftInput[i].r = spectrum[i].real();
-        ifftInput[i].i = spectrum[i].imag();
-    }
-
-    std::vector<float> timeOut(m_fftSize);
-    kiss_fftri((kiss_fftr_cfg)m_kissIfftCfg, ifftInput.data(), timeOut.data());
-
-    std::vector<float> outputFrame(m_frameSize, 0.0f);
     int overlapSize = m_fftSize - m_frameSize;
-
-    // Apply Synthesis Window, Normalize, and Overlap-Add
     float normFactor = 1.0f / m_fftSize;
 
+    // Apply Synthesis Window, Normalize, and Overlap-Add
     for (int i = 0; i < m_frameSize; ++i) {
-        float currentVal = timeOut[i] * m_window[i] * normFactor;
-        outputFrame[i] = m_overlapBufferOut[i] + currentVal;
+        float currentVal = m_timeOut[i] * m_window[i] * normFactor;
+        m_outputFrame[i] = m_overlapBufferOut[i] + currentVal;
     }
 
     // Save the tail for the next overlap
     for (int i = 0; i < overlapSize; ++i) {
-        m_overlapBufferOut[i] = timeOut[i + m_frameSize] * m_window[i + m_frameSize] * normFactor;
+        m_overlapBufferOut[i] = m_timeOut[i + m_frameSize] * m_window[i + m_frameSize] * normFactor;
     }
 
-    return outputFrame;
+    return m_outputFrame;
 }
 
 }

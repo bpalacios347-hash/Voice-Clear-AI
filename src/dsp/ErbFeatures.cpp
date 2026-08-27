@@ -14,6 +14,13 @@ ErbFeatures::ErbFeatures(int sampleRate, int fftSize, int numErbBands, int numDf
     , m_numErbBands(numErbBands)
     , m_numDfBins(numDfBins)
 {
+    // Pre-allocate zero-allocation scratch buffers
+    m_featErb.resize(m_numErbBands, 0.0f);
+    m_powerSpec.resize(m_numBins, 0.0f);
+    m_featSpec.resize(2 * m_numDfBins, 0.0f);
+    m_binMask.resize(m_numBins, 1.0f);
+    m_enhancedSpectrum.resize(m_numBins, {0.0f, 0.0f});
+
     InitErbFilterbank();
     ResetState();
 }
@@ -82,16 +89,14 @@ void ErbFeatures::InitErbFilterbank() {
     }
 }
 
-std::vector<float> ErbFeatures::ComputeErbFeatures(const std::vector<std::complex<float>>& spectrum) {
-    std::vector<float> featErb(m_numErbBands);
+const std::vector<float>& ErbFeatures::ComputeErbFeatures(const std::vector<std::complex<float>>& spectrum) {
     const float alpha = 0.9900498337491681f; // exp(-0.01 / 1.0)
     const float wnorm = 1.0f / static_cast<float>(m_fftSize);
     const float wnormSq = wnorm * wnorm;
 
     // 1. Compute normalized power spectrum: |X[i]|^2 * (1/N)^2
-    std::vector<float> powerSpec(m_numBins);
     for (int i = 0; i < m_numBins; ++i) {
-        powerSpec[i] = std::norm(spectrum[i]) * wnormSq;
+        m_powerSpec[i] = std::norm(spectrum[i]) * wnormSq;
     }
 
     // 2. Average energy per ERB band and apply libDF band_mean_norm_erb
@@ -102,7 +107,7 @@ std::vector<float> ErbFeatures::ComputeErbFeatures(const std::vector<std::comple
         
         float k = 1.0f / static_cast<float>(bandSize);
         for (int j = 0; j < bandSize; ++j) {
-            energy += powerSpec[currentBin + j] * k;
+            energy += m_powerSpec[currentBin + j] * k;
         }
         currentBin += bandSize;
         
@@ -110,15 +115,14 @@ std::vector<float> ErbFeatures::ComputeErbFeatures(const std::vector<std::comple
         float& s = m_erbNormState[band];
         
         s = x * (1.0f - alpha) + s * alpha;
-        featErb[band] = (x - s) / 40.0f; // Normalized for neural input
+        m_featErb[band] = (x - s) / 40.0f; // Normalized for neural input
     }
 
-    return featErb;
+    return m_featErb;
 }
 
-std::vector<float> ErbFeatures::ComputeSpecFeatures(const std::vector<std::complex<float>>& spectrum) {
+const std::vector<float>& ErbFeatures::ComputeSpecFeatures(const std::vector<std::complex<float>>& spectrum) {
     // 2 channels (real, imag), 96 bins = 192 floats
-    std::vector<float> featSpec(2 * m_numDfBins);
     const float alpha = 0.9900498337491681f;
     const float wnorm = 1.0f / static_cast<float>(m_fftSize);
 
@@ -132,14 +136,14 @@ std::vector<float> ErbFeatures::ComputeSpecFeatures(const std::vector<std::compl
         s = x_norm * (1.0f - alpha) + s * alpha;
         float denom = std::sqrt(s) + 1e-10f;
 
-        featSpec[bin] = re / denom;
-        featSpec[m_numDfBins + bin] = im / denom;
+        m_featSpec[bin] = re / denom;
+        m_featSpec[m_numDfBins + bin] = im / denom;
     }
-    return featSpec;
+    return m_featSpec;
 }
 
 void ErbFeatures::InterpolateErbMask(const std::vector<float>& erbMask, std::vector<float>& binMask) {
-    binMask.resize(m_numBins, 1.0f);
+    binMask.assign(m_numBins, 1.0f);
     if (erbMask.empty()) return;
     
     size_t baseIdx = erbMask.size() >= static_cast<size_t>(m_numErbBands) 
@@ -157,7 +161,7 @@ void ErbFeatures::InterpolateErbMask(const std::vector<float>& erbMask, std::vec
     }
 }
 
-std::vector<std::complex<float>> ErbFeatures::ApplyFilters(
+const std::vector<std::complex<float>>& ErbFeatures::ApplyFilters(
     const std::vector<float>& erbMask, 
     const std::vector<float>& dfCoefs,
     const std::vector<std::complex<float>>& currentSpectrum,
@@ -180,15 +184,12 @@ std::vector<std::complex<float>> ErbFeatures::ApplyFilters(
     m_specHistory[4] = currentSpectrum;
 
     // 2. Expand ERB Mask across all frequency bins
-    std::vector<float> binMask;
-    InterpolateErbMask(erbMask, binMask);
+    InterpolateErbMask(erbMask, m_binMask);
 
     // Attenuation floor calculation (e.g. -28 dB floor = 0.0398)
     // Guarantees voice consonants, fricatives, and quiet syllables are NEVER cancelled out
     float attenLimitDb = std::abs(settings.suppressionDepthDb);
     float lim = (attenLimitDb > 0.0f) ? std::pow(10.0f, -attenLimitDb / 20.0f) : 0.025f;
-
-    std::vector<std::complex<float>> enhancedSpectrum(m_numBins);
 
     // 3. Stage 1: Deep Filtering (DF-Op) 5-tap Complex FIR on lowest 96 bins (0 to 4.8 kHz)
     bool hasDf = (!dfCoefs.empty() && (dfCoefs.size() % 960 == 0 || dfCoefs.size() % 192 == 0));
@@ -214,17 +215,17 @@ std::vector<std::complex<float>> ErbFeatures::ApplyFilters(
                 out_i += (sre * cim + sim * cre);
             }
 
-            enhancedSpectrum[bin] = std::complex<float>(out_r, out_i);
+            m_enhancedSpectrum[bin] = std::complex<float>(out_r, out_i);
         } else {
-            float g = std::max(binMask[bin], lim);
-            enhancedSpectrum[bin] = currentSpectrum[bin] * g;
+            float g = std::max(m_binMask[bin], lim);
+            m_enhancedSpectrum[bin] = currentSpectrum[bin] * g;
         }
     }
 
     // 4. Stage 2: High Frequency ERB Neural Mask on bins 96 to 480 (4.8 kHz to 24 kHz)
     for (int bin = m_numDfBins; bin < m_numBins; ++bin) {
-        float g = std::max(binMask[bin], lim);
-        enhancedSpectrum[bin] = currentSpectrum[bin] * g;
+        float g = std::max(m_binMask[bin], lim);
+        m_enhancedSpectrum[bin] = currentSpectrum[bin] * g;
     }
 
     // 5. Zero-Latency Transient Impulse & Clap Shaper (Instant Attack)
@@ -257,10 +258,10 @@ std::vector<std::complex<float>> ErbFeatures::ApplyFilters(
 
     if (isTransientNoise) {
         for (int bin = 0; bin < m_numDfBins && bin < m_numBins; ++bin) {
-            enhancedSpectrum[bin] *= 0.02f; // -34 dB instant clamp on transient impulse
+            m_enhancedSpectrum[bin] *= 0.02f; // -34 dB instant clamp on transient impulse
         }
         for (int bin = m_numDfBins; bin < m_numBins; ++bin) {
-            enhancedSpectrum[bin] *= 0.005f; // -46 dB instant annihilation on high-frequency click
+            m_enhancedSpectrum[bin] *= 0.005f; // -46 dB instant annihilation on high-frequency click
         }
     }
 
@@ -272,10 +273,10 @@ std::vector<std::complex<float>> ErbFeatures::ApplyFilters(
     }
 
     for (int bin = 0; bin < m_numBins; ++bin) {
-        enhancedSpectrum[bin] *= makeupGain;
+        m_enhancedSpectrum[bin] *= makeupGain;
     }
 
-    return enhancedSpectrum;
+    return m_enhancedSpectrum;
 }
 
 }

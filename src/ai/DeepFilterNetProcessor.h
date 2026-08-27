@@ -55,6 +55,10 @@ namespace VoiceClear::AI {
         std::vector<float> m_erbHistory;
         std::vector<float> m_realHistory;
         std::vector<float> m_imagHistory;
+
+        // Zero-allocation scratch vectors for ONNX outputs
+        std::vector<float> m_output0;
+        std::vector<float> m_output1;
     };
 
 }

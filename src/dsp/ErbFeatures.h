@@ -23,13 +23,13 @@ namespace DSP {
         ErbFeatures(int sampleRate, int fftSize, int numErbBands, int numDfBins);
         
         // Calculates ERB features from the complex spectrum (32 bands)
-        std::vector<float> ComputeErbFeatures(const std::vector<std::complex<float>>& spectrum);
+        const std::vector<float>& ComputeErbFeatures(const std::vector<std::complex<float>>& spectrum);
 
         // Formats the complex spectrum for feat_spec (2 * 96 = 192 floats)
-        std::vector<float> ComputeSpecFeatures(const std::vector<std::complex<float>>& spectrum);
+        const std::vector<float>& ComputeSpecFeatures(const std::vector<std::complex<float>>& spectrum);
 
         // Applies Adaptive Spectral Wiener Filter fused with Neural ERB Mask
-        std::vector<std::complex<float>> ApplyFilters(
+        const std::vector<std::complex<float>>& ApplyFilters(
             const std::vector<float>& erbMask, 
             const std::vector<float>& dfCoefs,
             const std::vector<std::complex<float>>& currentSpectrum,
@@ -46,6 +46,13 @@ namespace DSP {
         int m_numBins;
         int m_numErbBands;
         int m_numDfBins;
+
+        // Pre-allocated scratch buffers (Zero-allocation audio path)
+        std::vector<float> m_featErb;
+        std::vector<float> m_powerSpec;
+        std::vector<float> m_featSpec;
+        std::vector<float> m_binMask;
+        std::vector<std::complex<float>> m_enhancedSpectrum;
 
         // Non-overlapping Rectangular ERB Bands
         std::vector<int> m_erbBandSizes;

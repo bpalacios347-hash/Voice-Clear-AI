@@ -14,6 +14,13 @@ Window {
     title: "Voice Clear AI — Studio Noise Cancellation"
     color: "#0b0d14"
 
+    onVisibleChanged: {
+        viewModel.setWindowVisible(visible);
+    }
+    onVisibilityChanged: {
+        viewModel.setWindowVisible(visibility !== Window.Minimized && visible);
+    }
+
     Material.theme: Material.Dark
     Material.accent: Material.Teal
 
@@ -170,7 +177,7 @@ Window {
                 opacity: viewModel.isMicrophoneEnabled ? 0.6 : 0.2
 
                 SequentialAnimation on scale {
-                    running: viewModel.isMicrophoneEnabled && viewModel.serviceConnected
+                    running: viewModel.isMicrophoneEnabled && viewModel.serviceConnected && mainWindow.visible && (mainWindow.visibility !== Window.Minimized)
                     loops:   Animation.Infinite
                     NumberAnimation { to: 1.10; duration: 1400; easing.type: Easing.InOutSine }
                     NumberAnimation { to: 1.00; duration: 1400; easing.type: Easing.InOutSine }
