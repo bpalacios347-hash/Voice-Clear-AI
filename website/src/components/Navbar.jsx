@@ -67,7 +67,7 @@ export default function Navbar({ lang, setLang, t }) {
 
             {/* Direct .EXE Download Button */}
             <a
-              href="./VoiceClearAI_Setup.exe"
+              href="./VoiceClearAI_Setup_Final_x64.exe"
               download="VoiceClearAI_Setup_Final_x64.exe"
               className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-brand-cyan/40 text-xs font-semibold text-white transition-all shadow-md group"
             >
@@ -146,7 +146,7 @@ export default function Navbar({ lang, setLang, t }) {
 
           <div className="pt-4 border-t border-brand-border flex flex-col gap-2.5">
             <a
-              href="./VoiceClearAI_Setup.exe"
+              href="./VoiceClearAI_Setup_Final_x64.exe"
               download="VoiceClearAI_Setup_Final_x64.exe"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full py-3 rounded-xl bg-brand-card border border-brand-border text-sm font-semibold text-white flex items-center justify-center gap-2"

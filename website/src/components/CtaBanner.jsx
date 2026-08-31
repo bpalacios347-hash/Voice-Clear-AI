@@ -34,7 +34,7 @@ export default function CtaBanner({ t }) {
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <a
-                href="./VoiceClearAI_Setup.exe"
+                href="./VoiceClearAI_Setup_Final_x64.exe"
                 download="VoiceClearAI_Setup_Final_x64.exe"
                 className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-white hover:bg-slate-100 text-slate-950 font-extrabold text-base shadow-xl transition-all transform hover:-translate-y-0.5"
               >

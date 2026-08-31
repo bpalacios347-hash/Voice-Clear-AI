@@ -48,7 +48,7 @@ export default function Hero({ t }) {
             
             {/* Direct .EXE Download Button */}
             <a
-              href="./VoiceClearAI_Setup.exe"
+              href="./VoiceClearAI_Setup_Final_x64.exe"
               download="VoiceClearAI_Setup_Final_x64.exe"
               className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-cyan via-brand-accent to-brand-mint text-slate-950 font-extrabold text-base shadow-xl shadow-brand-cyan/25 hover:shadow-brand-cyan/40 transform hover:-translate-y-1 transition-all duration-200 group"
             >
